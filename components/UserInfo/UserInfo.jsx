@@ -1,7 +1,6 @@
 "use client"
 import React, { useState } from "react"
 import { signIn, signOut, useSession } from 'next-auth/react'
-import { data } from "autoprefixer";
 import { POST } from "@/app/api/auth/[...nextauth]/route";
 
 export default function UserInfo() {
@@ -10,7 +9,7 @@ export default function UserInfo() {
     const [userSaved, setUserSaved] = useState(false);
 
     async function loginUser(user){
-        console.log('Start Login User : ${JSON.stringify(session.user)}');
+        console.log(`Start Login User : ${JSON.stringify(session.user)}`);
         try{
             const response = await fetch("http://localhost:3000/api/user",{
                 method: POST,
