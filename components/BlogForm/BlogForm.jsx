@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useRef } from 'react';
+import { React, useState, useRef } from 'react';
 import './BlogForm.css'
 import { Input, Select, Option, Textarea, Card, Button, Checkbox } from '@mui/joy';
 import ReactGoogleAutocomplete from 'react-google-autocomplete';
@@ -22,6 +22,23 @@ export default function BlogForm() {
     const introductionRef = useRef();
     const bodyRef = useRef();
     const photosRef = useRef();
+    const [photoArray, setPhotoArray]=useState([]);
+
+    const [urlValue, setUrlValue]=useState();
+
+    function addPhoto() {
+       console.log(urlValue); 
+       console.log(photoArray);
+       const newItem = { url: urlValue }
+       if (Array.isArray(photoArray)){
+        const newPhotoArray =[...photoArray, newItem]
+        console.log(newPhotoArray);
+        setPhotoArray(newPhotoArray);
+       }
+       else {
+        setPhotoArray([newItem])
+       }
+    }
 
     const updatedState = () => {
         setFormData({
@@ -97,6 +114,10 @@ export default function BlogForm() {
             size="lg">
                 <div className="urlAndSubmitContainer">
                     <Input className='url'
+                    value={urlValue}
+                    onChange={(e)=> {
+                        setUrlValue(e.target.value)
+                    }}
                     color="neutral"
                     disabled={false}
                     size="md"
@@ -106,35 +127,27 @@ export default function BlogForm() {
                     ref={photosRef}
                     />
                     <Button className='submitPhoto'
-                    // onClick={submitPhoto}
+                    onClick={addPhoto}
                     size="md"
                     variant="outlined"
                     >Upload
                     </Button>
                 </div>
-                <div className="photoContainer">
-                    <Card className="photo"></Card>
-                    <Checkbox
-                    label="Main"
-                    color='primary'
-                    size="md"
-                    variant="solid"
-                    />        
-                    <Card className="photo"></Card>
-                    <Checkbox
-                    label="Main"
-                    color='primary'
-                    size="md"
-                    variant="solid"
-                    />        
-                    <Card className="photo"></Card>
-                    <Checkbox
-                    label="Main"
-                    color='primary'
-                    size="md"
-                    variant="solid"
-                    />
-                </div>        
+                    { photoArray && <div className="photoContainer">
+                        {photoArray.map((photo, index) => {
+                            return ( 
+                            <div key={index} className="photoCard">
+                                <Card className="photo"></Card>
+                                <Checkbox
+                                label="Main"
+                                color='primary'
+                                size="md"
+                                variant="solid"
+                                />      
+                            </div>
+                            );  
+                        })}      
+                    </div>}      
             </Card> 
             <Button className='submitForm'
             onClick={submitBlog}
