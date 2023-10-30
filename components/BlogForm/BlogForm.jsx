@@ -1,11 +1,61 @@
 "use client"
 
+import { useState, useRef } from 'react';
 import './BlogForm.css'
-import { Input, Select, Option, Textarea, Card, Button } from '@mui/joy';
+import { Input, Select, Option, Textarea, Card, Button, Checkbox } from '@mui/joy';
 import ReactGoogleAutocomplete from 'react-google-autocomplete';
 import { onPlaceSelectedHandler } from '../ReactGoogleAutocomplete/ReactGoogleAutocomplete';
 
 export default function BlogForm() {
+    const [formData, setFormData]=useState({
+        title: '',
+        introduction: '',
+        body: '',
+        photos: [],
+        location: [],
+        userId: null,
+        collecitonIds: []
+    });
+
+    const titleRef = useRef();
+    const collectionRef = useRef();
+    const introductionRef = useRef();
+    const bodyRef = useRef();
+    const photosRef = useRef();
+
+    const updatedState = () => {
+        setFormData({
+            title: titleRef.current.value,
+            collection: collectionRef.current.value,
+            introduction: introductionRef.current.value,
+            body: bodyRef.current.value,
+            photos: photosRef.current.value
+        });
+    };
+
+    async function submitBlog(e) {
+        e.preventDefault();
+        updatedState();
+
+        try {
+           const response = await fetch('http://localhost:3000/blogs/new', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            });
+            
+            if (response.ok) {
+                console.log('Okay!');
+            } else {
+                console.log('Bad!');
+            }
+        } catch (error){
+            console.error(error);
+        }
+    };
+
   return (
     <div className="blogFormMain">
         <h1 className='blogH1'>Create a blog post</h1>
@@ -17,6 +67,7 @@ export default function BlogForm() {
             placeholder="Title"
             variant="outlined"
             required
+            ref={titleRef}
             />
             <div className="LocationAndCollectionContainer">
                 <ReactGoogleAutocomplete className='locationAndCollection'
@@ -34,30 +85,59 @@ export default function BlogForm() {
             </div>
             <Textarea className="blogIntro"
             size="lg" 
-            name="Size" 
-            placeholder="Introduction" />
+            placeholder="Introduction"
+            ref={introductionRef}
+            />
             <Textarea className="blogBody"
-            size="lg" 
-            name="Size" 
-            placeholder="Body" />
+            size="lg"  
+            placeholder="Body"
+            ref={bodyRef}
+            />
             <Card className="uploadPhotos"
             size="lg">
-                <Input className='url'
-                color="neutral"
-                disabled={false}
-                size="md"
-                placeholder="Url"
-                variant="outlined"
-                required
-                />
+                <div className="urlAndSubmitContainer">
+                    <Input className='url'
+                    color="neutral"
+                    disabled={false}
+                    size="md"
+                    placeholder="Url"
+                    variant="outlined"
+                    required
+                    ref={photosRef}
+                    />
+                    <Button className='submitPhoto'
+                    // onClick={submitPhoto}
+                    size="md"
+                    variant="outlined"
+                    >Upload
+                    </Button>
+                </div>
                 <div className="photoContainer">
-                    <Card className="photo">Photo</Card>        
-                    <Card className="photo">Photo</Card>        
-                    <Card className="photo">Photo</Card>
+                    <Card className="photo"></Card>
+                    <Checkbox
+                    label="Main"
+                    color='primary'
+                    size="md"
+                    variant="solid"
+                    />        
+                    <Card className="photo"></Card>
+                    <Checkbox
+                    label="Main"
+                    color='primary'
+                    size="md"
+                    variant="solid"
+                    />        
+                    <Card className="photo"></Card>
+                    <Checkbox
+                    label="Main"
+                    color='primary'
+                    size="md"
+                    variant="solid"
+                    />
                 </div>        
             </Card> 
-            <Button className='submit'
-            // onClick={function(){}}
+            <Button className='submitForm'
+            onClick={submitBlog}
             size="md"
             variant="outlined"
             >Submit
