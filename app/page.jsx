@@ -1,7 +1,9 @@
+import BlogForm from "@/components/BlogForm/BlogForm"
+
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <h1>Home</h1>
+    <main className="flex min-h-screen flex-col items-center">
+      <BlogForm />
     </main>
   )
 }

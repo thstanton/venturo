@@ -1,0 +1,75 @@
+.blogFormMain {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgb(251, 240, 223);
+}
+
+.blogForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 4vmin;
+    width: 100%;
+    height: 100%;
+}
+
+.blogTitle {
+    width: 75vmin;
+    height: 4vmin;
+}
+
+.LocationAndCollectionContainer {
+    width: 75vmin;
+    display: flex;
+    justify-content: space-between;
+}
+
+.locationAndCollection {
+    width: 20vmin;
+    height: 4vmin;
+}
+
+.blogIntro {
+    width: 75vmin;
+    height: 12vmin;
+}
+
+.blogBody {
+    width: 75vmin;
+    height: 24vmin;
+}
+
+.blogH1 {
+    font-size: 2.5vmin;
+    color: black;
+    margin-top: 2vmin;
+    margin-bottom: 2vmin;
+}
+
+.uploadPhotos {
+    width: 75vmin;
+    height: 20vmin;
+}
+
+.photoContainer {
+    display: flex;
+    align-items: flex-end;
+    height: 100%;
+    gap: 2vmin;
+}
+
+.photo {
+    height: 8vmin;
+    width: 8vmin;
+    text-align: center;
+}
+
+.submit {
+    background-color: white;
+    color: black;
+    width: 75vmin;
+}
