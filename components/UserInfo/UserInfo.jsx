@@ -31,7 +31,7 @@ export default function UserInfo() {
 
     if(session && session.user){
         loginUser(session.user)
-        
+        // console.log('Start Login User : ${JSON.stringify(session.user)}');
         if(userSaved)
         {
             return(
