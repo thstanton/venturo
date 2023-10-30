@@ -1,7 +1,7 @@
 "use client"
 import React, { useState } from "react"
 import { signIn, signOut, useSession } from 'next-auth/react'
-import { POST } from "@/app/api/auth/[...nextauth]/route";
+// import { POST } from "@/app/api/auth/[...nextauth]/route";
 
 export default function UserInfo() {
 
@@ -9,28 +9,39 @@ export default function UserInfo() {
     const [userSaved, setUserSaved] = useState(false);
 
     async function loginUser(user){
-        console.log(`Start Login User : ${JSON.stringify(session.user)}`);
         try{
-            const response = await fetch("http://localhost:3000/api/user",{
-                method: POST,
+            const URL = "http://localhost:3000/api/user"
+            await fetch(URL,{
+                method: "POST",
                 headers:{
-                    "Content-Type": "application/json",
+                    "Content-Type" : "application/json"
                 },
-                body:JSON.stringify({
-                    name: user.name,
-                    email: user.email,
-                    avatar: user.image
-                })
-            });
-            if(response.ok) setUserSaved(true)
+                body: JSON.stringify({
+                            name: user.name,
+                            email: user.email,
+                            avatar: user.image
+                        })
+            })
+            .then(res => 
+            {
+                if(res.status === 200){
+                    setUserSaved(true)
+                    console.log(`Start Login User : ${res.created}`);
+                    console.log('Saved Successfully');
+                }
+            }).catch (error => {
+                console.log(`Saving error : ${error}`);
+            })
+            
         }catch(error){
-            setUserSaved(true);
+            setUserSaved(false);
+            console.log(`Saving error : ${error}`);
         }
     }
 
     if(session && session.user){
+        console.log(`Start Login User : ${JSON.stringify(session.user)}`);
         loginUser(session.user)
-        // console.log('Start Login User : ${JSON.stringify(session.user)}');
         if(userSaved)
         {
             return(
