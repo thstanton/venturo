@@ -2,25 +2,42 @@ import BlogHeaderBlock from '@/components/BlogHeaderBlock/BlogHeaderBlock'
 import BlogTitleBlock from '@/components/BlogTitleBlock/BlogTitleBlock'
 import BlogImageGallery from '@/components/BlogImageGallery/BlogImageGallery'
 import BlogLocationWidget from '@/components/BlogLocationWidget/BlogLocationWidget'
-import Grid from '@mui/joy/Grid'
+import { Grid, Typography } from '@mui/joy'
+import './SinglePost.css'
 
-export default function SinglePost({ params }) {
+async function getBlog(id) {
+  try {
+    const res = await fetch(`${process.env.API_URL}/blogs/${id}`)
+    const data = await res.json()
+    return data.data
+  } catch (error) {
+    return console.error(error)
+  }
+}
+
+export default async function SinglePost({ params }) {
+  const blog = await getBlog(params.id)
+  const mainImage = await blog.photos.filter(photo => photo.isMain === true)
 
   return (
     <div className='SinglePost'>
-      <BlogHeaderBlock image={image} />
-      <Grid container spacing={2} sx={{ flexGrow: 1 }}>
-        <Grid xs={8}>
-            <BlogTitleBlock title={title} intro={intro} />
+      <BlogHeaderBlock photo={mainImage[0].url} sx={{mb: 2}} />
+      <Grid 
+        container 
+        spacing={2} 
+        sx={{ flexGrow: 1 }}
+      >
+        <Grid xs={7}>
+            <BlogTitleBlock title={blog.title} intro={blog.introduction} />
         </Grid>
-        <Grid xs={4}>
-            <BlogLocationWidget location={location} />
+        <Grid xs={5}>
+            <BlogLocationWidget />
         </Grid>
         <Grid xs={12}>
-          <BlogImageGallery images={images} />
+          <BlogImageGallery photos={blog.photos} />
         </Grid>
         <Grid xs={8}>
-          <p>{ params.id } This will be the body of the post Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quia maiores voluptate earum eligendi sit obcaecati, repellat id maxime reiciendis, modi, quisquam praesentium enim? Harum quam debitis quaerat, obcaecati totam nam?</p>
+          <Typography level="body-md" className="body">{ blog.body }</Typography>
         </Grid>
       </Grid>
     </div>

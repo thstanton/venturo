@@ -1,0 +1,8 @@
+.BlogTitleBlock {
+    margin-top: 3vmin;
+    margin-left: 4vmin;
+}
+
+.BlogTitleBlock * {
+    margin-top: 3vmin;
+}
