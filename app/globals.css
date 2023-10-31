@@ -28,6 +28,7 @@ body {
 
 .a-block {
   background-color: #0C356A;
+  color: white;
 }
 
 .b-block {
@@ -43,7 +44,7 @@ body {
   color: black;
 }
 
-.recent-blogs, .top-destinations, .collections {
+.a-block, .b-block, .c-block, .d-block {
   padding: 2vmin 4vmin;
 }
 
