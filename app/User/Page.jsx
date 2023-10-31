@@ -25,10 +25,7 @@ export default function UserPage() {
 
     return(
         <Card>
-            
-                <Typography level="title-md">Personal info</Typography>
-               
-            
+            <Typography level="title-md">Personal info</Typography>
             <Divider />
             <UserInfo user={user}/>
         </Card>
