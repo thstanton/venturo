@@ -141,7 +141,7 @@ export default function BlogForm() {
                                 <Checkbox
                                 label="Main"
                                 color='primary'
-                                size="md"
+                                size="sm"
                                 variant="solid"
                                 />      
                             </div>
