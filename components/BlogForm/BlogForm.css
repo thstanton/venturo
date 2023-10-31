@@ -57,7 +57,8 @@
 
 .photoContainer {
     display: flex;
-    align-items: flex-end;
+    justify-content: center;
+    align-items: center;
     height: 100%;
     gap: 2vmin;
 }
@@ -65,12 +66,15 @@
 .photo {
     height: 8vmin;
     width: 8vmin;
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 0.4vmin solid darkgray;
+    overflow: hidden; 
 }
 
 .submitForm {
     background-color: white;
-    color: black;
     width: 75vmin;
 }
 
@@ -79,11 +83,21 @@
     justify-content: space-between;
 }
 
-.submitPhoto {
-    color: black;
+#submitPhoto {
     width: 15%;
 }
 
 .url {
     width: 80%;
+}
+
+/* .photoImg {
+    min-height: 8vmin;
+    min-width: 8vmin;
+} */
+
+.photoImg {
+   min-width: 8vmin;
+    min-height: 8vmin;
+    object-fit: cover;
 }

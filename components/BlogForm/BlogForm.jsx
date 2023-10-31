@@ -1,70 +1,68 @@
 "use client"
 
-import { React, useState, useRef } from 'react';
+import { React, useState } from 'react';
 import './BlogForm.css'
 import { Input, Select, Option, Textarea, Card, Button, Checkbox } from '@mui/joy';
 import ReactGoogleAutocomplete from 'react-google-autocomplete';
 import { onPlaceSelectedHandler } from '../ReactGoogleAutocomplete/ReactGoogleAutocomplete';
 
 export default function BlogForm() {
-    const [formData, setFormData]=useState({
-        title: '',
-        introduction: '',
-        body: '',
-        photos: [],
-        location: [],
-        userId: null,
-        collecitonIds: []
-    });
+    const [titleData, setTitleData]=useState('');
+    const [collectionIdsData, setCollectionIdsData]=useState('');
+    const [introductionData, setIntroductionData]=useState('');
+    const [bodyData, setBodyData]=useState('');
+    const [photosData, setPhotosData]=useState([]);
 
-    const titleRef = useRef();
-    const collectionRef = useRef();
-    const introductionRef = useRef();
-    const bodyRef = useRef();
-    const photosRef = useRef();
-    const [photoArray, setPhotoArray]=useState([]);
-
-    const [urlValue, setUrlValue]=useState();
+    const [urlValue, setUrlValue]=useState('');
 
     function addPhoto() {
-       console.log(urlValue); 
-       console.log(photoArray);
        const newItem = { url: urlValue }
-       if (Array.isArray(photoArray)){
-        const newPhotoArray =[...photoArray, newItem]
-        console.log(newPhotoArray);
-        setPhotoArray(newPhotoArray);
+        if (photosData.length >= 7) {
+            return
+        }
+        setPhotosData([...photosData, newItem])
+        setUrlValue('')
+        console.log('photosData:', photosData);
        }
-       else {
-        setPhotoArray([newItem])
-       }
+    
+
+    // Functions to handle data change   
+    function handleTitleChange(e) {     // set the states to the user's inputs
+        setTitleData(e.target.value)
+    }
+    function handleCollectionIdsChange(e) {
+        setCollectionIdsData(e.target.value)
+    }
+    function handleIntroductionChange(e) {
+        setIntroductionData(e.target.value)
+    }
+    function handleBodyChange(e) {
+        setBodyData(e.target.value)
     }
 
-    const updatedState = () => {
-        setFormData({
-            title: titleRef.current.value,
-            collection: collectionRef.current.value,
-            introduction: introductionRef.current.value,
-            body: bodyRef.current.value,
-            photos: photosRef.current.value
-        });
-    };
 
     async function submitBlog(e) {
         e.preventDefault();
-        updatedState();
+        if (titleData==='') return          // if any of these are empty, don't submit (these are currently the only required)
 
+        if (introductionData==='') return
+
+        if (bodyData==='') return
+
+        const body = {title: titleData, introduction: introductionData, body: bodyData, ...(collectionIdsData !== '')&& {collectionIds: collectionIdsData}, ...(photosData.length !== 0)&& {photos: photosData}}
+        console.log(body);                                                                 // if collectionIds data isn't empty, populate collectionIds        if photosData is not an empty string, populate photos
         try {
-           const response = await fetch('http://localhost:3000/blogs/new', {
+           const response = await fetch('http://localhost:3000/api/blogs/new', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(formData)
+                body: JSON.stringify(body) // post the body object initialized above
             });
             
             if (response.ok) {
                 console.log('Okay!');
+                console.log(response);
             } else {
                 console.log('Bad!');
             }
@@ -84,7 +82,8 @@ export default function BlogForm() {
             placeholder="Title"
             variant="outlined"
             required
-            ref={titleRef}
+            onChange={handleTitleChange}
+            name='title'
             />
             <div className="LocationAndCollectionContainer">
                 <ReactGoogleAutocomplete className='locationAndCollection'
@@ -95,6 +94,7 @@ export default function BlogForm() {
                 placeholder="Collection"
                 size="md"
                 variant="outlined"
+                onChange={handleCollectionIdsChange}
                 >
                 <Option value="location1">Collection 1</Option>
                 <Option value="location2">Collection 2</Option>
@@ -103,12 +103,12 @@ export default function BlogForm() {
             <Textarea className="blogIntro"
             size="lg" 
             placeholder="Introduction"
-            ref={introductionRef}
+            onChange={handleIntroductionChange}
             />
             <Textarea className="blogBody"
             size="lg"  
             placeholder="Body"
-            ref={bodyRef}
+            onChange={handleBodyChange}
             />
             <Card className="uploadPhotos"
             size="lg">
@@ -119,25 +119,28 @@ export default function BlogForm() {
                         setUrlValue(e.target.value)
                     }}
                     color="neutral"
-                    disabled={false}
                     size="md"
                     placeholder="Url"
                     variant="outlined"
+                    disabled={photosData.length >= 7}
                     required
-                    ref={photosRef}
                     />
-                    <Button className='submitPhoto'
+                    <Button id='submitPhoto'
                     onClick={addPhoto}
                     size="md"
                     variant="outlined"
+                    disabled={photosData.length >= 7}
                     >Upload
                     </Button>
                 </div>
-                    { photoArray && <div className="photoContainer">
-                        {photoArray.map((photo, index) => {
-                            return ( 
+                    { photosData.length > 0 &&
+                    <div className="photoContainer">
+                        {photosData.map((photo, index) => {
+                              return (
                             <div key={index} className="photoCard">
-                                <Card className="photo"></Card>
+                                <Card className="photo">
+                                    <img src={photo.url} alt="img" className="photoImg" />
+                                </Card>
                                 <Checkbox
                                 label="Main"
                                 color='primary'
@@ -146,8 +149,9 @@ export default function BlogForm() {
                                 />      
                             </div>
                             );  
-                        })}      
-                    </div>}      
+                         })}      
+                    </div>
+                     }      
             </Card> 
             <Button className='submitForm'
             onClick={submitBlog}
