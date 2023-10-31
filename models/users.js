@@ -12,7 +12,16 @@ const userSchema = new Schema({
     avatar: {
         type: String
     },
-    location: [],
+    location: { 
+        place_id: String, 
+        city: String, 
+        country: String,
+        geometry:{
+            longitude: Number,
+            Latitude: Number
+        }, 
+        formatted_address: String
+    },
     lastLoggedIn: {
         type: Date
     }

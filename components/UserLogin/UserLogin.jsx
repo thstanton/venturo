@@ -1,6 +1,7 @@
 "use client"
 import React, { useState } from "react"
 import { signIn, signOut, useSession } from 'next-auth/react'
+import Link from "next/link";
 
 export default function UserInfo() {
 
@@ -13,14 +14,18 @@ export default function UserInfo() {
             <button onClick={() => signOut()} className='text-red-600'>
                 Logout
             </button>
-            <div className="flex gap-4 ml-auto" onClick={()=>{}}>
-                <p className="text-sky-600">{ session?.user?.name }</p>
-                <img 
-                    className="rounded-full" 
-                    src={session?.user?.image} 
-                    width={40} 
-                    height={40}/> 
+            {/* got to User profile page when the user click on profile data */}
+            <Link href="/User"> 
+                <div className="flex gap-4 ml-auto" onClick={()=>{}}>
+                    <p className="text-sky-600">{ session?.user?.name }</p>
+                    <img 
+                        className="rounded-full" 
+                        src={session?.user?.image} 
+                        width={40} 
+                        height={40}/>     
                 </div>
+            </Link>
+               
             </div>
         )
     }
