@@ -11,7 +11,6 @@ export default function HomePageHeroBlock() {
         </video>
         <div className="header">
           <h1>Venturo</h1>
-          <h2>Find your next adventure</h2>
         </div>
     </div>
   )

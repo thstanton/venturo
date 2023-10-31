@@ -25,3 +25,28 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+.a-block {
+  background-color: #0C356A;
+}
+
+.b-block {
+  background-color: #FFC436;
+}
+
+.c-block {
+  background-color: #0174BE;
+}
+
+.d-block {
+  background-color: #FFF0CE;
+  color: black;
+}
+
+.recent-blogs, .top-destinations, .collections {
+  padding: 2vmin 4vmin;
+}
+
+.a-block h1, .b-block h1, .c-block h1 {
+  color: white;
+}
