@@ -18,10 +18,8 @@ const blogSchema = new Schema({
         place_id: String, 
         city: String, 
         country: String,
-        geometry:{
-            longitude: Number,
-            Latitude: Number
-        }, 
+        longitude: Number,
+        Latitude: Number, 
         formatted_address: String
     }],
     userId: {

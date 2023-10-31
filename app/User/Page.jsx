@@ -16,7 +16,8 @@ export default function UserPage() {
                 place_id:"ieegdiegiuqiwywoe3e", 
                 city:"London", 
                 country:"UK",
-                geometry:{longitude: 0.1234, Latitude: 9.765}, 
+                longitude: 0.1234, 
+                Latitude: 9.765, 
                 formatted_address: "London, UK"
             },
         createdAt: "2023-10-31T09:00:11.150Z",

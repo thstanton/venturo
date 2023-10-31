@@ -1,8 +1,47 @@
-import Grid from '@mui/joy/Grid'
 import Typography from '@mui/joy/Typography'
-import { AspectRatio,Divider, Avatar, Box, FormControl, IconButton, Stack,FormLabel,Input, Card } from '@mui/joy'
+import { AspectRatio, Stack, Card, Button, Modal, ModalClose, ModalDialog, Sheet } from '@mui/joy'
+import SelectLocation from '../SelectLocation/SelectLocation'
+import { useState } from 'react'
 
 export default function UserInfo({user}) {
+    const [location, setLocation] = useState(null)
+    const [showEditLocation, setShowEditLocation] = useState(false);
+  
+    async function handleOnEditClicked(){
+        // case of edit mode is shown
+        if(showEditLocation)
+        {
+            console.log('In Edit Mode');
+            console.log(`User After Udating Location ${JSON.stringify(location)}`);
+            // TODO request update user 
+            const URL = `http://localhost:3000/api/user`//`${process.env.API_URL}/user`
+            await fetch(URL,{
+                method: "PUT",
+                headers:{
+                    "Content-Type" : "application/json"
+                },
+                body: JSON.stringify({
+                    email: user.email,
+                    locationObject: location
+                })
+            })
+            .then(res => 
+            {
+                if(res.status === 200){
+                    console.log('User Location has been updated');
+                    setShowEditLocation(false)
+                    user.location = location;
+                    // TODO handle retuen user object from database
+                }
+            }).catch (error => {
+                console.log(`Saving error : ${error}`);
+            })
+            
+        }else{
+            console.log('In View Mode');
+            setShowEditLocation(true)
+        }
+    }
 
     return(
         <Card> 
@@ -17,7 +56,7 @@ export default function UserInfo({user}) {
                     <AspectRatio
                         ratio="1"
                         maxHeight={108}
-                        sx={{ flex: 1, minWidth: 108, borderRadius: '100%' }}>
+                        sx={{ flex: 1, minWidth: 108, borderRadius: '100vh' }}>
                         <img
                         src={user.avatar}
                         loading="lazy"
@@ -35,16 +74,26 @@ export default function UserInfo({user}) {
                         {user.email}
                     </Typography>
                     <Stack direction="row" spacing={2}>
-                        {/*import pin icon from google map api */}
-                        <img src="https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png"  width={20} height={20}/>
-                        {/* display user saved address */}
-                        <Typography component="h1" variant="h5">
-                            {user.location.formatted_address}
-                        </Typography>
+                        {showEditLocation ? 
+                            // case of edit mode is ON
+                            <SelectLocation setLocation={setLocation}/> : 
+                            // case of edit mode is OFF
+                            <Stack direction="row" spacing={2}>
+                                {/*import pin icon from google map api */}
+                                <img src="https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png"  width={20} height={20}/>
+                                {/* display user saved address */}
+                                <Typography component="h1" variant="h5">
+                                    {user.location.formatted_address}
+                                    {/* {(location) ? location.formatted_address : user.location.formatted_address} */}
+                                </Typography>
+                            </Stack>
+                        }
+                        <Button variant="outlined" color="primary" onClick={handleOnEditClicked}>Edit Location</Button>
                     </Stack>
                 </Stack>
             </Stack>
             </Stack>
         </Card>
+        
     )
 }

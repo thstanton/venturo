@@ -3,8 +3,6 @@
 import { React, useState } from 'react';
 import './BlogForm.css'
 import { Input, Select, Option, Textarea, Card, Button, Checkbox } from '@mui/joy';
-import ReactGoogleAutocomplete from 'react-google-autocomplete';
-import { onPlaceSelectedHandler } from '../ReactGoogleAutocomplete/ReactGoogleAutocomplete';
 
 export default function BlogForm() {
     const [titleData, setTitleData]=useState('');
@@ -12,6 +10,7 @@ export default function BlogForm() {
     const [introductionData, setIntroductionData]=useState('');
     const [bodyData, setBodyData]=useState('');
     const [photosData, setPhotosData]=useState([]);
+    const [location, setLocation] = useState({})
 
     const [urlValue, setUrlValue]=useState('');
 
@@ -48,7 +47,7 @@ export default function BlogForm() {
         if (introductionData==='') return
 
         if (bodyData==='') return
-
+        // TODO add location POST body
         const body = {title: titleData, introduction: introductionData, body: bodyData, ...(collectionIdsData !== '')&& {collectionIds: collectionIdsData}, ...(photosData.length !== 0)&& {photos: photosData}}
         console.log(body);                                                                 // if collectionIds data isn't empty, populate collectionIds        if photosData is not an empty string, populate photos
         try {
@@ -86,10 +85,11 @@ export default function BlogForm() {
             name='title'
             />
             <div className="LocationAndCollectionContainer">
-                <ReactGoogleAutocomplete className='locationAndCollection'
+                <SelectLocation className='locationAndCollection' setLocation={setLocation}/>
+                {/* <ReactGoogleAutocomplete className='locationAndCollection'
                 apiKey={process.env.YOUR_GOOGLE_MAPS_API_KEY}           
                 onPlaceSelected={onPlaceSelectedHandler}
-                />
+                /> */}
                 <Select className='locationAndCollection'
                 placeholder="Collection"
                 size="md"
