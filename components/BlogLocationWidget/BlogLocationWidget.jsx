@@ -6,7 +6,8 @@ export default function BlogLocationWidget() {
         color="primary"
         orientation="vertical"
         size="lg"
-        variant="outlined"
+        variant="soft"
+        sx={{ m: 3 }}
     >
         <Typography level="h3">Location Info</Typography>
     </Card>
