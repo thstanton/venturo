@@ -6,6 +6,7 @@ import CollectionForm from "../CollectionForm/CollectionForm"
 export default function EditCollectionButton({ collection }) {
     const [showModal, setShowModal] = useState(false)
 
+    
     return (
         <>
             <Button variant="soft" color="primary" onClick={() => setShowModal(true)}>Edit</Button>
@@ -15,7 +16,8 @@ export default function EditCollectionButton({ collection }) {
                 className="flex justify-center items-center"
             >
                 <ModalDialog>
-                    <CollectionForm mode="update" collection={collection} />
+                    {/* <CollectionForm mode="update" collection={collection} /> */}
+                    <CollectionForm mode="update" collection={{ name: 'hello' }} />
                 </ModalDialog>
             </Modal>
         </>

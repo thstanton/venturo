@@ -2,43 +2,25 @@
 import { Button, Input, Textarea, Typography } from "@mui/joy";
 import { useState } from "react";
 
-
 export default function CollectionForm({ mode, collection }) {
-    // const [name, setName] = useState('')
-    // const [desc, setDesc] = useState('')
-    // const [url, setUrl] = useState('')
-    console.log(collection)
     const [message, setMessage] = useState()
     const [newCollection, setNewCollection] = useState({
         name: '',
         desc: '',
         image: ''
     })
-
+    // console.log(collection)
     // If updating collection set inital values
-    if (mode === 'update') {
-        setNewCollection({
-            name: collection.name,
-            desc: collection.desc,
-            image: collection.image
-        })
-    }
+    // if (mode === 'update') {
+    //     setNewCollection({
+    //         name: collection.name
+    //     })
+    // }
 
     function handleChange(e) {
         const { name, value } = e.target
         setNewCollection((prevNewCollection => ({...prevNewCollection, [name]: value})))
     }
-    // function handleNameChange(e) {
-    //     setName(e.target.value)
-    // }
-
-    // function handleDescChange(e) {
-    //     setDesc(e.target.value)
-    // }
-
-    // function handleUrlChange(e) {
-    //     setUrl(e.target.value)
-    // }
 
     // Create new collection
     async function handleNew(e) {
