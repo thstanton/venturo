@@ -1,9 +1,9 @@
 "use client"
+import UserBlogs from "@/components/UserBlogs/UserBlogs";
 import UserInfo from "@/components/UserInfo/UserInfo";
-import { Box, Card, Typography, Divider} from "@mui/joy";
+import { Card, Typography, Divider} from "@mui/joy";
 
 import { useState } from "react";
-
 
 export default function UserPage() {
     const[user,setUser] = useState({
@@ -26,9 +26,13 @@ export default function UserPage() {
 
     return(
         <Card>
+            
             <Typography level="title-md">Personal info</Typography>
             <Divider />
             <UserInfo user={user}/>
+            <Divider />
+            <UserBlogs user={user}/>
+            
         </Card>
     )
 }

@@ -14,14 +14,14 @@ const blogSchema = new Schema({
         required: true
     },
     photos: [{ url: String, isMain: Boolean }],
-    location: [{ 
+    location: { 
         place_id: String, 
         city: String, 
         country: String,
         longitude: Number,
         Latitude: Number, 
         formatted_address: String
-    }],
+    },
     userId: {
         type: Schema.Types.ObjectId,
     },

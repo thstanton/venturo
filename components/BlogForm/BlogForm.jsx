@@ -3,6 +3,7 @@
 import { React, useState } from 'react';
 import './BlogForm.css'
 import { Input, Select, Option, Textarea, Card, Button, Checkbox } from '@mui/joy';
+import SelectLocation from '../SelectLocation/SelectLocation';
 
 export default function BlogForm() {
     const [titleData, setTitleData]=useState('');
@@ -48,7 +49,16 @@ export default function BlogForm() {
 
         if (bodyData==='') return
         // TODO add location POST body
-        const body = {title: titleData, introduction: introductionData, body: bodyData, ...(collectionIdsData !== '')&& {collectionIds: collectionIdsData}, ...(photosData.length !== 0)&& {photos: photosData}}
+        const body = {
+            title: titleData, 
+            introduction: introductionData, 
+            body: bodyData, 
+            ...(collectionIdsData !== '')&& {collectionIds: collectionIdsData}, 
+            ...(photosData.length !== 0)&& {photos: photosData},
+            ...(location!==null) && {location: location},
+            // TODO need to add userId
+            userId:"65417970c1f3efbcf29d947b"
+        }
         console.log(body);                                                                 // if collectionIds data isn't empty, populate collectionIds        if photosData is not an empty string, populate photos
         try {
            const response = await fetch('http://localhost:3000/api/blogs/new', {
