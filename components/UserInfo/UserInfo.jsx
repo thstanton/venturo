@@ -54,15 +54,12 @@ export default function UserInfo({user}) {
             <Stack direction="row" spacing={2}>
                 {/* display user avatar image */}
                 <Stack direction="column" spacing={1}>
-                    <AspectRatio
+                    {/* <AspectRatio
                         ratio="1"
                         maxHeight={108}
-                        sx={{ flex: 1, borderRadius: '100vh' }}>
-                        <img
-                        src={user.avatar}
-                        loading="lazy"
-                        alt=""/>
-                    </AspectRatio>
+                        sx={{ flex: 1, borderRadius: '100vh' }}> */}
+                        <img src={user.avatar} loading="lazy"alt=""/>
+                    {/* </AspectRatio> */}
                 </Stack>
                 {/* display user profile details*/}
                 <Stack spacing={1} sx={{ flexGrow: 1 }}>
