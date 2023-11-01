@@ -1,0 +1,15 @@
+.blogCardContainer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 4vmin;
+    overflow-x: scroll;
+    height: auto;
+    width: 98vw;
+}
+
+.scrollContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
