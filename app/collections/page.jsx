@@ -1,10 +1,9 @@
-import CollectionForm from "@/components/CollectionForm/CollectionForm"
+import EditCollections from "@/components/EditCollections/EditCollections"
 
 export default function CollectionsPage() {
   return (
     <div>
-        CollectionsPage
-        <CollectionForm />
+        <EditCollections />
     </div>
   )
 }
