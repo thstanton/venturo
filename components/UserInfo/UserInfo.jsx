@@ -1,7 +1,6 @@
 import Grid from '@mui/joy/Grid'
 import Typography from '@mui/joy/Typography'
 import { AspectRatio,Divider, Avatar, Box, FormControl, IconButton, Stack,FormLabel,Input, Card } from '@mui/joy'
-import EditRoundedIcon from '@mui/icons-material/EditRounded';
 
 export default function UserInfo({user}) {
 
