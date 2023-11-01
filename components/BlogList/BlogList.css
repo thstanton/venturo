@@ -1,0 +1,5 @@
+.BlogList {
+    display: flex;
+    flex-flow: row nowrap;
+    gap: 2vmin;
+}

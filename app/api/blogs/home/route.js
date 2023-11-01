@@ -6,8 +6,17 @@ import { NextResponse } from "next/server";
 export async function GET() {
     try {
         await dbConnect()
-        const blogs = await Blog.find()
-        return NextResponse.json({ status:200, data: blogs })
+        // Get 5 most recent blogs
+        const blogs = await Blog.aggregate([
+            { $sort: { updatedAt: -1 } },
+            { $limit: 5 }
+        ])
+        // ! Get top locations
+
+        // ! Combine results into one object
+
+        // Return
+        return NextResponse.json({ status:200, recent: blogs })
     } catch (error) {
         return NextResponse.json({ status: 400, error: error })
     }

@@ -28,20 +28,24 @@ body {
 
 .a-block {
   background-color: #0C356A;
+  width: 100%;
   color: white;
 }
 
 .b-block {
   background-color: #FFC436;
+  width: 100%;
 }
 
 .c-block {
   background-color: #0174BE;
+  width: 100%;
 }
 
 .d-block {
   background-color: #FFF0CE;
   color: black;
+  width: 100%;
 }
 
 .a-block, .b-block, .c-block, .d-block {

@@ -1,7 +1,7 @@
 import { Button } from '@mui/joy'
 import './VideoBlock.css'
 
-export default function HomePageHeroBlock() {
+export default function VideoBlock() {
 
   return (
     <div className="VideoBlock">
@@ -11,7 +11,7 @@ export default function HomePageHeroBlock() {
         </video>
         <div className="header">
           <h2>Find your next adventure</h2>
-          <Button variant="soft" color="neutral">Browse Collections</Button>
+          <Button variant="soft" color="neutral" component="a" href="/collections">Browse Collections</Button>
         </div>
     </div>
   )

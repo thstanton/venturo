@@ -1,8 +1,9 @@
 import SingleBlogCard from "../SingleBlogCard/SingleBlogCard";
+import './BlogList.css'
 
 export default function BlogList({ blogs }) {
   return (
-    <div>
+    <div className="BlogList">
       {
         blogs &&
           blogs.map(blog => (
