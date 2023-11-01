@@ -1,7 +1,25 @@
-import { Card, Stack, Button } from "@mui/joy"
+import { Card, Stack, Button, Typography} from "@mui/joy"
 import Link from "next/link"
+import BlogList from "../BlogList/BlogList"
 
-export default function UserBlogs({user}) {
+async function getUserBlogs(user) {
+    try {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blogs/user/${user._id}`)
+        const data = await res.json()
+        return data.blogs
+      
+        console.log('Get User Blogs ::: Something went wrong')
+  
+    } catch (error) {
+      
+      console.error(error)
+  
+    }
+}
+
+export default async function UserBlogs({user}) {
+    
+    const blogs = await getUserBlogs(user);
 
     return(
         <Card> 
@@ -16,6 +34,10 @@ export default function UserBlogs({user}) {
                     <Link href="/form"> 
                         <Button variant="outlined" color="primary">Add Blog</Button>
                     </Link>
+                    <div className='recent-blogs d-block'>
+                        <Typography level="h1">Posts:</Typography>
+                        <BlogList blogs={ blogs }/>
+                    </div>
                 </Stack>
             </Stack>
             </Stack>
