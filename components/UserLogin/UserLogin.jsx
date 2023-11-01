@@ -15,7 +15,7 @@ export default function UserInfo() {
                 Logout
             </button>
             {/* got to User profile page when the user click on profile data */}
-            <Link href="/User"> 
+            <Link href="/user"> 
                 <div className="flex gap-4 ml-auto" onClick={()=>{}}>
                     <p className="text-sky-600">{ session?.user?.name }</p>
                     <img 
