@@ -2,12 +2,13 @@
 import UserBlogs from "@/components/UserBlogs/UserBlogs";
 import UserInfo from "@/components/UserInfo/UserInfo";
 import { Card, Typography, Divider} from "@mui/joy";
+import { getSession } from "next-auth/react";
 
 import { useState } from "react";
 
 export default function UserPage() {
     const[user,setUser] = useState({
-        _id: "6540c21be6f067a56bca3a90",
+        _id: "65417970c1f3efbcf29d947b",
         name: "Heba Arafat",
         email: "heba.arafat159@gmail.com",
         avatar: "https://lh3.googleusercontent.com/a/ACg8ocJ-hZOO8ktTqhN1i5QCmMSTd5L21m37olBzu4UPWcxuXsM=s96-c",
