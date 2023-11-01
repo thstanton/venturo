@@ -13,8 +13,8 @@ export default function UserInfo({user}) {
         {
             console.log('In Edit Mode');
             console.log(`User After Udating Location ${JSON.stringify(location)}`);
-            // TODO request update user 
-            const URL = `http://localhost:3000/api/user`//`${process.env.API_URL}/user`
+            
+            const URL = `${process.env.NEXT_PUBLIC_API_URL}/user`
             await fetch(URL,{
                 method: "PUT",
                 headers:{
@@ -31,7 +31,6 @@ export default function UserInfo({user}) {
                     console.log('User Location has been updated');
                     setShowEditLocation(false)
                     user.location = location;
-                    // TODO handle retuen user object from database
                 }
             }).catch (error => {
                 console.log(`Saving error : ${error}`);
@@ -44,11 +43,13 @@ export default function UserInfo({user}) {
     }
 
     return(
+        <>        
+        {user ?
         <Card> 
             <Stack
             direction="column"
             spacing={2}
-            sx={{ display: { xs: 'flex', md: 'none' }, my: 1 }}>
+            sx={{ display: { xs: 'flex' }, my: 1 }}>
             
             <Stack direction="row" spacing={2}>
                 {/* display user avatar image */}
@@ -56,7 +57,7 @@ export default function UserInfo({user}) {
                     <AspectRatio
                         ratio="1"
                         maxHeight={108}
-                        sx={{ flex: 1, minWidth: 108, borderRadius: '100vh' }}>
+                        sx={{ flex: 1, borderRadius: '100vh' }}>
                         <img
                         src={user.avatar}
                         loading="lazy"
@@ -84,7 +85,6 @@ export default function UserInfo({user}) {
                                 {/* display user saved address */}
                                 <Typography component="h1" variant="h5">
                                     {user.location.formatted_address}
-                                    {/* {(location) ? location.formatted_address : user.location.formatted_address} */}
                                 </Typography>
                             </Stack>
                         }
@@ -93,7 +93,8 @@ export default function UserInfo({user}) {
                 </Stack>
             </Stack>
             </Stack>
-        </Card>
-        
+        </Card> 
+        : null}
+        </>
     )
 }

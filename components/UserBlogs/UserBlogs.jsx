@@ -8,7 +8,7 @@ export default function UserBlogs({user}) {
             <Stack
             direction="column"
             spacing={2}
-            sx={{ display: { xs: 'flex', md: 'none' }, my: 1 }}>
+            sx={{ display: { xs: 'flex' }, my: 1 }}>
             
             <Stack direction="row" spacing={2}>
                 {/* display user avatar image */}
