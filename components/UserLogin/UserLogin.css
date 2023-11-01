@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Arimo:wght@500&family=Dela+Gothic+One&family=Kanit&family=Open+Sans:ital,wght@0,300;0,400;1,400&family=Orbitron&family=Oswald:wght@500&family=Poiret+One&family=Poppins&family=Sulphur+Point:wght@300;400;700&display=swap');
+
+.userContainer {
+    display: flex;
+    align-items: center;
+    gap: 4vmin;
+}
+
+.logInBtn {
+    height: 4vmin;
+    width: 8vmin;
+    border-radius: 10%;
+    font-size: 1.5vmin;
+    font-family: Poppins;
+}
+
+.logOutBtn {
+    font-family: Poppins;
+    border-radius: 10%;
+}
+
+.logInBtn:hover {
+    background-color: gainsboro;
+    transform: scale(1.05);
+}
+
+#userIcon {
+    border-radius: 50%;
+    margin-bottom: 1vmin;
+    margin-top: -1vmin;
+}
