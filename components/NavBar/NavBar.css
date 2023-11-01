@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Arimo:wght@500&family=Dela+Gothic+One&family=Kanit&family=Open+Sans:ital,wght@0,300;0,400;1,400&family=Orbitron&family=Oswald:wght@500&family=Poiret+One&family=Poppins&family=Sulphur+Point:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&display=swap');
+
+.navContainer {
+    height: 8vmin;
+    width: auto; 
+    background-color: lightsalmon;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.navItem {
+    font-size: 2vmin;
+    color: white;
+    font-family: Poppins;
+}
+
+.navVenturo {
+    font-size: 6vmin;
+    color: white;
+    font-family: 'Bebas Neue';
+}
+
+
+#navItem.activeLink {
+    color: navy;
+}
