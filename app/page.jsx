@@ -17,10 +17,6 @@ export default function Home() {
         <Typography level="h1">Top Destinations:</Typography>
         <LocationList />
       </div>
-      <div className='collections c-block'>
-        <Typography level="h1">Collections:</Typography>
-        <LocationList />
-      </div>
     </main>
   )
 }
