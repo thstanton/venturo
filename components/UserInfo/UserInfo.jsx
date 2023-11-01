@@ -49,7 +49,7 @@ export default function UserInfo({user}) {
             <Stack
             direction="column"
             spacing={2}
-            sx={{ display: { xs: 'flex', md: 'none' }, my: 1 }}>
+            sx={{ display: { xs: 'flex' }, my: 1 }}>
             
             <Stack direction="row" spacing={2}>
                 {/* display user avatar image */}
@@ -57,7 +57,7 @@ export default function UserInfo({user}) {
                     <AspectRatio
                         ratio="1"
                         maxHeight={108}
-                        sx={{ flex: 1, minWidth: 108, borderRadius: '100vh' }}>
+                        sx={{ flex: 1, borderRadius: '100vh' }}>
                         <img
                         src={user.avatar}
                         loading="lazy"
