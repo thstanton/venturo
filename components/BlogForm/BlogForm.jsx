@@ -84,7 +84,7 @@ export default function BlogForm() {
         }
         console.log(body);                                                                 // if collectionIds data isn't empty, populate collectionIds        if photosData is not an empty string, populate photos
         try {
-           const response = await fetch('http://localhost:3000/api/blogs/new', {
+           const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blogs/new`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
