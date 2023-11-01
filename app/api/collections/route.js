@@ -10,6 +10,18 @@ export async function POST(req) {
         await newCollection.save()
         return NextResponse.json({ body: newCollection, status: 200 })
     } catch (error) {
+        console.error('POST')
+        return NextResponse.json({ status: 400, error: error })
+    }
+}
+
+export async function GET(req) {
+    try {
+        await dbConnect()
+        const collections = await Collection.find()
+        return NextResponse.json({ data: collections, status: 200 })
+    } catch (error) {
+        console.error('GET')
         return NextResponse.json({ status: 400, error: error })
     }
 }
