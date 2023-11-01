@@ -1,4 +1,9 @@
 .blogCard {
-    height: 5vmin;
-    width: 5vmin;
+    min-height: 20vmin;
+    min-width: 20vmin;
+    display: flex;
+}
+
+.cardContent {
+    text-align: center;
 }
