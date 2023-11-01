@@ -14,7 +14,7 @@ export default function BlogImageGallery({ photos }) {
     }
 
   return (
-    <div className="BlogImageGallery">
+    <div className="BlogImageGallery a-block">
         <Grid container spacing={2} sx={{ flexGrow: 1 }}>
             { photos 
                 ? 
