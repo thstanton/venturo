@@ -32,17 +32,21 @@ export default function UserPage() {
         {
             console.log(`Load session user: ${JSON.stringify(session.user.email)}`);
             // TODO get user object from database
+            try {
+                const res = await fetch(`${process.env.API_URL}/user/${session.user.email}`)
+                const data = await res.json()
+                console.log(`User Retrived Object : ${JSON.stringify(data.data)}` )
+                //return data.data
+              } catch (error) {
+                return console.error(error)
+              }
         }
     }
 
     useEffect(()=>{
         console.log(`use Effect`);
-        checkUserObject()
+        // checkUserObject()
     })
-    // useEffect(async () => {
-    //     const session = await getSession()
-    //     console.log(`Load session user: ${JSON.stringify(session.user)}`);
-    // })
 
     return(
         <Card>
