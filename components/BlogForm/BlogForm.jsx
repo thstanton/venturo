@@ -1,6 +1,6 @@
 "use client"
 
-import { React, useState } from 'react';
+import { React, useEffect, useState } from 'react';
 import './BlogForm.css'
 import { Input, Select, Option, Textarea, Card, Button, Checkbox } from '@mui/joy';
 import SelectLocation from '../SelectLocation/SelectLocation';
@@ -47,6 +47,22 @@ export default function BlogForm() {
         setBodyData(e.target.value)
     }
 
+    useEffect(() => {
+    async function fetchCollections() {
+        try {
+            const response = await fetch('http://localhost:3000/api/collections')
+             if (response.ok) {
+                const data = await response.json();
+                console.log(data);
+                setCollectionIdsData(data);
+             }
+        } catch (error) {
+            console.error(error);
+        }
+    }
+    fetchCollections();
+}, [])
+    
 
     async function submitBlog(e) {
         e.preventDefault();
@@ -126,8 +142,11 @@ export default function BlogForm() {
                 variant="outlined"
                 onChange={handleCollectionIdsChange}
                 >
-                <Option value="location1">Collection 1</Option>
-                <Option value="location2">Collection 2</Option>
+                { Array.isArray(collectionIdsData) && collectionIdsData.map((collection, index) => (   
+                <Option key={index} value={collection.name}>
+                    {/* {collection._id.name} */}
+                </Option>
+                ))}
                 </Select>
             </div>
             <Textarea className="blogIntro"
