@@ -5,9 +5,11 @@ import './BlogForm.css'
 import { Input, Select, Option, Textarea, Card, Button, Checkbox } from '@mui/joy';
 import SelectLocation from '../SelectLocation/SelectLocation';
 
+import { checkUserObject } from "@/utilities/utility";
+
 export default function BlogForm() {
     const [titleData, setTitleData]=useState('');
-    const [collectionIdsData, setCollectionIdsData]=useState('');
+    const [collectionIdsData, setCollectionIdsData]=useState([]);
     const [introductionData, setIntroductionData]=useState('');
     const [bodyData, setBodyData]=useState('');
     const [photosData, setPhotosData]=useState([]);
@@ -32,8 +34,11 @@ export default function BlogForm() {
     function handleTitleChange(e) {     // set the states to the user's inputs
         setTitleData(e.target.value)
     }
-    function handleCollectionIdsChange(e) {
-        setCollectionIdsData(e.target.value)
+    function handleCollectionIdsChange(event, newValue) {
+        console.log(`New Collection Object ${newValue}`)
+        // setCollectionIdsData([...collectionIdsData,newValue])
+        // TODO add the collection object
+        setCollectionIdsData((oldCollectionIds) => [...oldCollectionIds,newValue])
     }
     function handleIntroductionChange(e) {
         setIntroductionData(e.target.value)
@@ -57,14 +62,26 @@ export default function BlogForm() {
         // console.log(updatedMainPhoto);
         const updatedPhotoArray = photosData.map(photo => {if (photo.url===mainPhoto) {
             return {...photo, isMain: true}
-        }
-        else {
-            return photo
-        }
-    })
-    console.log('updatedPhotoArray', updatedPhotoArray);
+            }
+            else {
+                return photo
+            }
+        })
+        console.log('updatedPhotoArray', updatedPhotoArray);
 
-        const body = {title: titleData, introduction: introductionData, body: bodyData, ...(collectionIdsData !== '')&& {collectionIds: collectionIdsData}, ...(updatedPhotoArray.length !== 0)&& {photos: updatedPhotoArray}}
+        // get user from database before saving new blog
+        const user = await checkUserObject();
+        console.log(`Session User : ${JSON.stringify(user)}`);
+       
+        const body = {
+            title: titleData, 
+            introduction: introductionData, 
+            body: bodyData,
+            //...(collectionIdsData.length !== 0)&& {collectionIds: collectionIdsData},
+            ...(updatedPhotoArray.length !== 0)&& {photos: updatedPhotoArray},
+            location: location,
+            userId: user
+        }
         console.log(body);                                                                 // if collectionIds data isn't empty, populate collectionIds        if photosData is not an empty string, populate photos
         try {
            const response = await fetch('http://localhost:3000/api/blogs/new', {
@@ -102,10 +119,7 @@ export default function BlogForm() {
             />
             <div className="LocationAndCollectionContainer">
                 <SelectLocation className='locationAndCollection' setLocation={setLocation}/>
-                {/* <ReactGoogleAutocomplete className='locationAndCollection'
-                apiKey={process.env.YOUR_GOOGLE_MAPS_API_KEY}           
-                onPlaceSelected={onPlaceSelectedHandler}
-                /> */}
+               
                 <Select className='locationAndCollection'
                 placeholder="Collection"
                 size="md"
