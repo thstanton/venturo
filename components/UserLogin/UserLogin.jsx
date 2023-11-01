@@ -3,7 +3,7 @@ import React from "react"
 import { signIn, signOut, useSession } from 'next-auth/react'
 import Link from "next/link";
 
-export default function UserInfo() {
+export default function UserLogin() {
 
     const {data: session} = useSession();
     // in case of the user is loggedin and has it's user data retrived from google-auth api
