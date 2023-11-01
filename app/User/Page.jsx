@@ -2,12 +2,13 @@
 import UserBlogs from "@/components/UserBlogs/UserBlogs";
 import UserInfo from "@/components/UserInfo/UserInfo";
 import { Card, Typography, Divider} from "@mui/joy";
-import { getSession } from "next-auth/react";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { getSession } from "next-auth/react"
 
 export default function UserPage() {
-    const[user,setUser] = useState({
+    
+    const [user,setUser] = useState({
         _id: "65417970c1f3efbcf29d947b",
         name: "Heba Arafat",
         email: "heba.arafat159@gmail.com",
@@ -24,6 +25,24 @@ export default function UserPage() {
         createdAt: "2023-10-31T09:00:11.150Z",
         updatedAt: "2023-10-31T09:00:11.150Z",    
     })
+
+    async function checkUserObject(){
+        const session = await getSession()
+        if(session && session.user)
+        {
+            console.log(`Load session user: ${JSON.stringify(session.user.email)}`);
+            // TODO get user object from database
+        }
+    }
+
+    useEffect(()=>{
+        console.log(`use Effect`);
+        checkUserObject()
+    })
+    // useEffect(async () => {
+    //     const session = await getSession()
+    //     console.log(`Load session user: ${JSON.stringify(session.user)}`);
+    // })
 
     return(
         <Card>

@@ -13,7 +13,6 @@
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.14.16",
     "@mui/joy": "^5.0.0-beta.12",
-    "cookies-next": "^4.0.0",
     "dotenv": "^16.3.1",
     "mongoose": "^7.6.3",
     "next": "13.5.6",
