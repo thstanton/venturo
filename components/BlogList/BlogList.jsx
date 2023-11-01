@@ -1,13 +1,13 @@
 import SingleBlogCard from "../SingleBlogCard/SingleBlogCard";
 import './BlogList.css'
 
-export default function BlogList({ blogs }) {
+export default function BlogList({ blogs, editMode }) {
   return (
     <div className="BlogList">
       {
         blogs &&
           blogs.map(blog => (
-            <SingleBlogCard key={ blog._id } blog={ blog } />
+            <SingleBlogCard key={ blog._id } blog={ blog } editMode={editMode}/>
           ))
       }
     </div>

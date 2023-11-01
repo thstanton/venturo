@@ -7,7 +7,7 @@ export async function GET(req,{ params }) {
     try {
         await dbConnect()
         const blogs = await Blog.find({ "userId" : params.userId});
-        console.log(`User Blogs List :::: ${JSON.stringify(blogs)}`);
+        // console.log(`User Blogs List :::: ${JSON.stringify(blogs)}`);
         // Return
         return NextResponse.json({ status:200, blogs: blogs })
     } catch (error) {

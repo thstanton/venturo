@@ -36,7 +36,7 @@ export default async function UserBlogs({user}) {
                     </Link>
                     <div className='recent-blogs d-block'>
                         <Typography level="h1">Posts:</Typography>
-                        <BlogList blogs={ blogs }/>
+                        <BlogList blogs={ blogs } editMode={true}/>
                     </div>
                 </Stack>
             </Stack>

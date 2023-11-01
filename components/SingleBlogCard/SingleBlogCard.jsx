@@ -1,7 +1,8 @@
-import { Card, Typography, CardContent, CardOverflow, CardCover, LocationOnRoundedIcon } from '@mui/joy';
+import { Card, Typography, CardContent, CardCover, Button } from '@mui/joy';
 import './SingleBlogCard.css'
+import EditBlogButtons from '../EditBlogButtons/EditBlogButtons';
 
-export default async function SingleBlogCard({blog}) {
+export default async function SingleBlogCard({blog, editMode}) {
   
   let mainImageUrl = '';
   async function getMainImage(blog){
@@ -13,6 +14,31 @@ export default async function SingleBlogCard({blog}) {
   }
 
   await getMainImage(blog)
+
+  async function deleteBlog(){ 
+    try {
+      console.log(`Delete User Blog : )//${blog.title}`)
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blogs/${blog._id}`, {
+           method: 'DELETE',
+           headers: {
+               'Content-Type': 'application/json'
+           }
+      });
+      // TODO this needs to be changed
+      if (response.ok) {
+        console.log('Okay!');
+        console.log(response);
+      } else {
+        console.log('Bad!');
+      }
+    } catch (error){
+       console.error(error);
+    }
+  }
+
+  async function editBlog(blog){
+    alert(`Edit User Blog `)
+  }
   
   return (
     <Card 
@@ -56,6 +82,8 @@ export default async function SingleBlogCard({blog}) {
            {/* {(blog.collectionIds && blog.collectionIds.length>0) ? blog.collectionIds[0].name: null} */}
         </Typography>
       </CardContent>
+      {/* add edit and delete blog component in case of user selected blogs */}
+      {editMode ?  <EditBlogButtons key={blog._id} deleteBlog={deleteBlog} editBlog={editBlog}/>: null}
     </Card>
   )
 }
