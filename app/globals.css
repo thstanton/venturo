@@ -1,6 +1,6 @@
-@tailwind base;
+/* @tailwind base;
 @tailwind components;
-@tailwind utilities;
+@tailwind utilities; */
 
 :root {
   --foreground-rgb: 0, 0, 0;
@@ -24,4 +24,30 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
+}
+
+.a-block {
+  background-color: #0C356A;
+  color: white;
+}
+
+.b-block {
+  background-color: #FFC436;
+}
+
+.c-block {
+  background-color: #0174BE;
+}
+
+.d-block {
+  background-color: #FFF0CE;
+  color: black;
+}
+
+.a-block, .b-block, .c-block, .d-block {
+  padding: 2vmin 4vmin;
+}
+
+.a-block h1, .b-block h1, .c-block h1 {
+  color: white;
 }

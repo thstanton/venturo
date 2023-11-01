@@ -12,10 +12,12 @@ export default function BlogForm() {
     const [photosData, setPhotosData]=useState([]);
     const [location, setLocation] = useState({})
 
+    const [mainPhoto, setMainPhoto]=useState();
+
     const [urlValue, setUrlValue]=useState('');
 
     function addPhoto() {
-       const newItem = { url: urlValue }
+       const newItem = { url: urlValue, isMain: false }
         if (photosData.length >= 7) {
             return
         }
@@ -47,8 +49,21 @@ export default function BlogForm() {
         if (introductionData==='') return
 
         if (bodyData==='') return
-        // TODO add location POST body
-        const body = {title: titleData, introduction: introductionData, body: bodyData, ...(collectionIdsData !== '')&& {collectionIds: collectionIdsData}, ...(photosData.length !== 0)&& {photos: photosData}}
+
+        // const mainPhotoObject = photosData.filter(photo => photo.url===mainPhoto)
+        // console.log(mainPhotoObject);
+        // const updatedMainPhoto = mainPhotoObject[0].mainPhoto=true
+        // console.log(updatedMainPhoto);
+        const updatedPhotoArray = photosData.map(photo => {if (photo.url===mainPhoto) {
+            return {...photo, isMain: true}
+        }
+        else {
+            return photo
+        }
+    })
+    console.log('updatedPhotoArray', updatedPhotoArray);
+
+        const body = {title: titleData, introduction: introductionData, body: bodyData, ...(collectionIdsData !== '')&& {collectionIds: collectionIdsData}, ...(updatedPhotoArray.length !== 0)&& {photos: updatedPhotoArray}}
         console.log(body);                                                                 // if collectionIds data isn't empty, populate collectionIds        if photosData is not an empty string, populate photos
         try {
            const response = await fetch('http://localhost:3000/api/blogs/new', {
@@ -146,6 +161,9 @@ export default function BlogForm() {
                                 color='primary'
                                 size="sm"
                                 variant="solid"
+                                checked={mainPhoto===photo.url}
+                                onChange={(e)=> setMainPhoto(e.target.value)}
+                                value={photo.url}
                                 />      
                             </div>
                             );  
