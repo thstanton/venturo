@@ -9,14 +9,14 @@ async function getBlog(id) {
   try {
     const res = await fetch(`${process.env.API_URL}/blogs/${id}`)
     const data = await res.json()
-    return data.blog
+    return data
   } catch (error) {
     return console.error(error)
   }
 }
 
 export default async function SinglePost({ params }) {
-  const blog = await getBlog(params.id)
+  const { blog, user } = await getBlog(params.id)
   const mainImage = await blog ?.photos.filter(photo => photo.isMain === true)
 
   return ( <>
@@ -28,16 +28,26 @@ export default async function SinglePost({ params }) {
         sx={{ flexGrow: 1 }}
       >
         <Grid xs={7}>
-            <BlogTitleBlock title={blog.title} intro={blog.introduction} />
+            <BlogTitleBlock 
+              title={blog.title} 
+              author={user} 
+              intro={blog.introduction} 
+              date={blog.createdAt} 
+            />
         </Grid>
         <Grid xs={5}>
-            <BlogLocationWidget />
+            <BlogLocationWidget locationData={blog.location} />
         </Grid>
         <Grid xs={12}>
           <BlogImageGallery photos={blog.photos} />
         </Grid>
         <Grid xs={8}>
-          <Typography level="body-md" className="body">{ blog.body }</Typography>
+          <Typography 
+            level="body-md" 
+            className="body"
+          >
+            { blog.body }
+          </Typography>
         </Grid>
       </Grid>
     </div>
