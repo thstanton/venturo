@@ -4,7 +4,7 @@ export async function checkUserObject(){
     const session = await getSession()
     if(session && session.user)
     {
-        console.log(`Session ::::: ${JSON.stringify(session.user.email)}`);
+        // console.log(`Session ::::: ${JSON.stringify(session.user.email)}`);
         // TODO get user object from database
         try {
             const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/${session.user.email}`)

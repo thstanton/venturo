@@ -17,11 +17,11 @@ async function getBlog(id) {
 
 export default async function SinglePost({ params }) {
   const blog = await getBlog(params.id)
-  const mainImage = await blog.photos.filter(photo => photo.isMain === true)
+  const mainImage = await blog ?.photos.filter(photo => photo.isMain === true)
 
-  return (
-    <div className='SinglePost'>
-      <BlogHeaderBlock photo={mainImage[0].url} sx={{mb: 2}} />
+  return ( <>
+    {blog ? <div className='SinglePost'>
+      <BlogHeaderBlock photo={mainImage&&mainImage[0].url} sx={{mb: 2}} />
       <Grid 
         container 
         spacing={2} 
@@ -41,5 +41,8 @@ export default async function SinglePost({ params }) {
         </Grid>
       </Grid>
     </div>
+    : null
+    }
+    </>
   )
 }
