@@ -1,4 +1,4 @@
-import { Sheet, ModalClose } from "@mui/joy"
+import { Card, ModalClose } from "@mui/joy"
 import Modal from "@mui/joy/Modal"
 
 export default function PhotoLightBox({ open, photo, setShowModal }) {
@@ -7,11 +7,22 @@ export default function PhotoLightBox({ open, photo, setShowModal }) {
         open={open}
         onClose={() => setShowModal(false)}
         className="flex justify-center items-center"
+        sx={{ 
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center'
+        }}
     >
-        <Sheet className="w-3/4">
+        <Card 
+          sx={{ 
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}
+        >
             <ModalClose variant="plain" sx={{ m: 1 }} />
-            <img src={ photo } />
-        </Sheet>
+            <img src={ photo } style={{ maxWidth: '90vmin', maxHeight: '70vmin' }} />
+        </Card>
     </Modal>
   )
 }

@@ -27,24 +27,27 @@ export default async function SingleCollectionPage({ params }) {
     return (
         <div>
             {collection &&
-                <div
-                    className='BlogHeaderBlock'
-                    style={{
-                        width: '100%',
-                        height: '60vmin',
-                        backgroundSize: 'cover',
-                        backgroundImage: `url('${collection.image}')`,
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        textAlign: 'center'
-                    }}
-                >
-                    <div>
+                <>
+                    <div
+                        className='BlogHeaderBlock'
+                        style={{
+                            width: '100%',
+                            height: '60vmin',
+                            backgroundSize: 'cover',
+                            backgroundImage: `url('${collection.image}')`,
+                            backgroundPosition: 'center',
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            textAlign: 'center'
+                        }}
+                    >
+                    </div>
+                    <div className="a-block">
                         <Typography level="h1">{collection.name}</Typography>
                         <Typography level="h3">{collection.desc}</Typography>
                     </div>
-                </div>
+                </>
             }
             <div className="d-block">
                 {blogs && <BlogList blogs={blogs} />}

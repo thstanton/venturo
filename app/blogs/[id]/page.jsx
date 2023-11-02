@@ -9,7 +9,7 @@ async function getBlog(id) {
   try {
     const res = await fetch(`${process.env.API_URL}/blogs/${id}`)
     const data = await res.json()
-    return data.data
+    return data.blog
   } catch (error) {
     return console.error(error)
   }
@@ -21,7 +21,7 @@ export default async function SinglePost({ params }) {
 
   return ( <>
     {blog ? <div className='SinglePost'>
-      <BlogHeaderBlock photo={mainImage&&mainImage[0].url} sx={{mb: 2}} />
+      <BlogHeaderBlock photo={mainImage && mainImage[0].url} sx={{mb: 2}} />
       <Grid 
         container 
         spacing={2} 
