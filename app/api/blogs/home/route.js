@@ -8,7 +8,7 @@ export async function GET() {
         await dbConnect()
         // Get 5 most recent blogs
         const blogs = await Blog.aggregate([
-            { $sort: { createdAt: 1 } },
+            { $sort: { createdAt: -1 } },
             { $limit: 5 }
         ])
 

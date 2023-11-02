@@ -4,7 +4,6 @@ import { WarningRounded } from "@mui/icons-material"
 
 export default function DeleteModal({ showDeleteModal, handleCloseDeleteModal, handleDelete }) {
 
-
     return (
         <div>
             <Modal
