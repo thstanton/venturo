@@ -21,14 +21,14 @@ export default function UserPage() {
 
     return (
         <>
-            {user ? <Card>
+            {user ? <Card className='recent-blogs d-block'>
                 <Typography level="title-md">Personal info</Typography>
                 <Divider />
                 <UserInfo user={user} />
                 <Divider />
                 <UserBlogs user={user} />
 
-                {(user) ?
+                {(user?.isAdmin) ?
                     <>
                         < Divider />
                         <CollectionList />

@@ -22,6 +22,10 @@ const userSchema = new Schema({
     },
     lastLoggedIn: {
         type: Date
+    },
+    isAdmin:{
+        type: Boolean,
+        default: false
     }
 }, {
     timestamps: true

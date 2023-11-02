@@ -121,7 +121,7 @@ export default function CollectionList() {
             <div className="CollectionList">
                 <Card>
                     <div className="card-header">
-                        <Typography level="h2">Collections</Typography>
+                        <Typography component="h1" variant="h5">Collections</Typography>
                         <Button
                             variant="solid"
                             color="success"
