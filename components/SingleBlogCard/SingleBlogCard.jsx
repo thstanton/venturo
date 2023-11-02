@@ -1,7 +1,8 @@
+"use client"
 import { Card, Typography, CardContent, CardOverflow, CardCover, LocationOnRoundedIcon } from '@mui/joy';
 import './SingleBlogCard.css'
 
-export default async function SingleBlogCard({blog}) {
+export default function SingleBlogCard({blog}) {
   
   let mainImageUrl = '';
   async function getMainImage(blog){
@@ -12,7 +13,7 @@ export default async function SingleBlogCard({blog}) {
       }
   }
 
-  await getMainImage(blog)
+  getMainImage(blog)
   
   return (
     <Card 
