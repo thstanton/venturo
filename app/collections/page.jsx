@@ -1,4 +1,4 @@
-import EditCollections from "@/components/EditCollections/EditCollections"
+import CollectionList from "@/components/CollectionList/CollectionList"
 
 export default function CollectionsPage() {
   return (
