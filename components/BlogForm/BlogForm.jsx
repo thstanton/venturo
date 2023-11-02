@@ -1,6 +1,6 @@
 "use client"
 
-import { React, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import './BlogForm.css'
 import { Input, Select, Option, Textarea, Card, Button, Checkbox } from '@mui/joy';
 import SelectLocation from '../SelectLocation/SelectLocation';
@@ -9,7 +9,8 @@ import { checkUserObject } from "@/utilities/utility";
 
 export default function BlogForm() {
     const [titleData, setTitleData]=useState('');
-    const [collectionIdsData, setCollectionIdsData]=useState([]);
+    const [collectionIdsData, setCollectionIdsData]=useState();
+    const [collectionOptionsData, setCollectionOptionsData]=useState([]);
     const [introductionData, setIntroductionData]=useState('');
     const [bodyData, setBodyData]=useState('');
     const [photosData, setPhotosData]=useState([]);
@@ -34,12 +35,13 @@ export default function BlogForm() {
     function handleTitleChange(e) {     // set the states to the user's inputs
         setTitleData(e.target.value)
     }
-    function handleCollectionIdsChange(event, newValue) {
+    function handleCollectionIdsChange(e, newValue) {
         console.log(`New Collection Object ${newValue}`)
         // setCollectionIdsData([...collectionIdsData,newValue])
         // TODO add the collection object
-        setCollectionIdsData((oldCollectionIds) => [...oldCollectionIds,newValue])
+        setCollectionIdsData(newValue);
     }
+    
     function handleIntroductionChange(e) {
         setIntroductionData(e.target.value)
     }
@@ -53,8 +55,8 @@ export default function BlogForm() {
             const response = await fetch('http://localhost:3000/api/collections')
              if (response.ok) {
                 const data = await response.json();
-                console.log(data);
-                setCollectionIdsData(data);
+                console.log(data.data);
+                setCollectionOptionsData(data.data);
              }
         } catch (error) {
             console.error(error);
@@ -66,11 +68,13 @@ export default function BlogForm() {
 
     async function submitBlog(e) {
         e.preventDefault();
-        if (titleData==='') return          // if any of these are empty, don't submit (these are currently the only required)
+        if (titleData==='') return     // if any of these are empty, don't submit (these are currently the only required)
 
         if (introductionData==='') return
 
         if (bodyData==='') return
+
+        // if (collectionIdsData===null) return
 
         // const mainPhotoObject = photosData.filter(photo => photo.url===mainPhoto)
         // console.log(mainPhotoObject);
@@ -93,14 +97,14 @@ export default function BlogForm() {
             title: titleData, 
             introduction: introductionData, 
             body: bodyData,
-            //...(collectionIdsData.length !== 0)&& {collectionIds: collectionIdsData},
-            ...(updatedPhotoArray.length !== 0)&& {photos: updatedPhotoArray},
+            ...(collectionIdsData !== null)&& {collectionIds: collectionIdsData},
+            ...(updatedPhotoArray.length !== 0)&& {photos: updatedPhotoArray}, 
             location: location,
             userId: user
         }
         console.log(body);                                                                 // if collectionIds data isn't empty, populate collectionIds        if photosData is not an empty string, populate photos
         try {
-           const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blogs/new`, {
+           const response = await fetch('http://localhost:3000/api/blogs/new', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -142,9 +146,9 @@ export default function BlogForm() {
                 variant="outlined"
                 onChange={handleCollectionIdsChange}
                 >
-                { Array.isArray(collectionIdsData) && collectionIdsData.map((collection, index) => (   
-                <Option key={index} value={collection.name}>
-                    {/* {collection._id.name} */}
+                { collectionOptionsData.length && collectionOptionsData.map((collection, index) => (   
+                <Option key={index} value={collection._id}>
+                    {collection.name}
                 </Option>
                 ))}
                 </Select>
