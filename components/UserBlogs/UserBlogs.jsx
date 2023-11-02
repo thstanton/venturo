@@ -47,8 +47,8 @@ export default function UserBlogs({ user }) {
                         <Link href="/form/blogform/-1">
                             <Button variant="outlined" color="primary">Add Blog</Button>
                         </Link>
-                        <div className='recent-blogs d-block'>
-                            <Typography level="h1">Posts:</Typography>
+                        <div >
+                            <Typography component="h1" variant="h5">Blogs</Typography>
                             {userBlogs && userBlogs.length > 0 ? <BlogList blogs={userBlogs} editMode={true} removeBlog={removeBlog} /> : null}
                         </div>
                     </Stack>

@@ -47,7 +47,7 @@ export default function UserInfo({user}) {
     return(
         <>        
         {user ?
-        <Card> 
+        <Card > 
             <Stack
             direction="column"
             spacing={2}
