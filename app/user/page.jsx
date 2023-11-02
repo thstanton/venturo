@@ -28,7 +28,7 @@ export default function UserPage() {
                 <Divider />
                 <UserBlogs user={user} />
 
-                {(user) ?
+                {(user?.isAdmin) ?
                     <>
                         < Divider />
                         <CollectionList />
