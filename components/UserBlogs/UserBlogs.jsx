@@ -6,10 +6,10 @@ import { useEffect, useState } from "react"
 
 export default function UserBlogs({ user }) {
     // console.log(user)
-    const [userBlogs, setUserBlogs] = useState([]) 
-    const[userData,setUserData] = useState(user)
-    
-    const loadBlogs = async() => {
+    const [userBlogs, setUserBlogs] = useState([])
+    const [userData, setUserData] = useState(user)
+
+    const loadBlogs = async () => {
         console.log(user)
         const URL = `${process.env.NEXT_PUBLIC_API_URL}/blogs/user/${user._id}`
         console.log(`URL ::: ${URL}`)
@@ -21,8 +21,18 @@ export default function UserBlogs({ user }) {
 
     useEffect(() => {
         loadBlogs();
-    },[user])
-   
+    }, [user])
+
+    /**
+     * remove deleted blog from list nad update the list view
+     * @param {*} blog 
+     */
+    function removeBlog(blog) {
+        if (blog)
+            userBlogs.splice(userBlogs.findIndex(b => b.title == blog.title), 1);
+
+    }
+    
     return (
         <Card>
             <Stack
@@ -39,7 +49,7 @@ export default function UserBlogs({ user }) {
                         </Link>
                         <div className='recent-blogs d-block'>
                             <Typography level="h1">Posts:</Typography>
-                            {userBlogs && userBlogs.length > 0 ? <BlogList blogs={userBlogs} editMode={true} /> : null}
+                            {userBlogs && userBlogs.length > 0 ? <BlogList blogs={userBlogs} editMode={true} removeBlog={removeBlog} /> : null}
                         </div>
                     </Stack>
                 </Stack>

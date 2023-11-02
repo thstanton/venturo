@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import './BlogForm.css'
+// import './BlogForm.css'
 import { Input, Select, Option, Textarea, Card, Button, Checkbox } from '@mui/joy';
 import SelectLocation from '../SelectLocation/SelectLocation';
 
@@ -16,7 +16,7 @@ export default function BlogForm({ blogId }) {
     const [introductionData, setIntroductionData] = useState('');
     const [bodyData, setBodyData] = useState('');
     const [photosData, setPhotosData] = useState([]);
-    const [location, setLocation] = useState({})
+    const [location, setLocation] = useState(null)
 
     const [mainPhoto, setMainPhoto] = useState();
 
@@ -40,7 +40,7 @@ export default function BlogForm({ blogId }) {
                     setTitleData(data.blog.title)
 
                     // set collections
-                    // setCollectionIdsData(data.blog.collectionIds)
+                    setCollectionIdsData(data.blog.collectionIds)
 
                     // set Introduction Text
                     setIntroductionData(data.blog.introduction)
@@ -87,6 +87,8 @@ export default function BlogForm({ blogId }) {
             if (response.ok) {
                 console.log('Okay!');
                 console.log(response);
+                // handle submit button for add or edit blog                                                            
+                router.push('/user')
             } else {
                 console.log('Bad!');
             }
@@ -112,6 +114,8 @@ export default function BlogForm({ blogId }) {
             if (response.ok) {
                 console.log('Okay!');
                 console.log(response);
+                // handle submit button for add or edit blog                                                            
+                router.push('/user')
             } else {
                 console.log('Bad!');
             }
@@ -204,8 +208,7 @@ export default function BlogForm({ blogId }) {
             userId: user
         }   
         console.log(body);
-        // handle submit button for add or edit blog                                                            
-        router.push('/user')
+        saveBlog(body)
     };
 
     return (
@@ -215,7 +218,7 @@ export default function BlogForm({ blogId }) {
 
                 <Input className='blogTitle'
                     color="neutral"
-                    // disabled={(blogId !== NEW_BLOG_ID) ? true : false}
+                    disabled={(blogId !== NEW_BLOG_ID) ? true : false}
                     size="md"
                     placeholder="Title"
                     variant="outlined"

@@ -1,11 +1,10 @@
 "use client"
 import { Card, Typography, CardContent, CardOverflow, CardCover, LocationOnRoundedIcon, Link } from '@mui/joy';
 // import Link from 'next/link';
-import './SingleBlogCard.css'
+// import './SingleBlogCard.css'
 import EditBlogButtons from '../EditBlogButtons/EditBlogButtons';
-import BlogForm from '../BlogForm/BlogForm';
 
-export default function SingleBlogCard({ blog, editMode }) {
+export default function SingleBlogCard({ blog, editMode, removeBlog }) {
   console.log(blog);
   let mainImageUrl = '';
   async function getMainImage(blog) {
@@ -27,13 +26,17 @@ export default function SingleBlogCard({ blog, editMode }) {
           'Content-Type': 'application/json'
         }
       });
-      // TODO this needs to be changed
-      if (response.ok) {
+
+      const data = await response.json()
+      if (data.status === 200) {
         console.log('Okay!');
         console.log(response);
+        //TODO call remove blog
+        removeBlog(blog)
       } else {
         console.log('Bad!');
       }
+
     } catch (error) {
       console.error(error);
     }
@@ -44,7 +47,8 @@ export default function SingleBlogCard({ blog, editMode }) {
       className="blogCard"
       size="lg"
       variant='outlined'
-      orientation='vertical'>
+      orientation='vertical'
+      >
 
       <CardCover>
         <img
@@ -58,13 +62,7 @@ export default function SingleBlogCard({ blog, editMode }) {
           className="blogTitle"
           level="title-lg"
           textColor="#fff">
-          <Link
-            href={`/blogs/${blog._id}`}
-            className='cardLink'
-            overlay
-          >
-            {blog.title}
-          </Link>
+          {blog.title}
         </Typography>
       </CardContent>
 

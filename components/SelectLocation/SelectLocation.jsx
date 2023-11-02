@@ -23,7 +23,7 @@ export default function SelectLocation({location, setLocation}){
         <ReactGoogleAutocomplete
           apiKey={YOUR_GOOGLE_MAPS_API_KEY}
           onPlaceSelected={onPlaceSelectedHandler}
-          defaultValue={location.formatted_address}/>
+          defaultValue={location?.formatted_address}/>
     )
   
 }
