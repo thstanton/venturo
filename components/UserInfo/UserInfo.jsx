@@ -81,7 +81,7 @@ export default function UserInfo({user}) {
                                 <img src="https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png"  width={20} height={20}/>
                                 {/* display user saved address */}
                                 <Typography component="h1" variant="h5">
-                                    {user.location.formatted_address}
+                                    {user.location?.formatted_address}
                                 </Typography>
                             </Stack>
                         }
