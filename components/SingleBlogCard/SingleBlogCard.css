@@ -1,9 +1,24 @@
 .blogCard {
     min-height: 20vmin;
     min-width: 20vmin;
+    max-height: 20vmin;
+    max-width: 20vmin;
     display: flex;
 }
 
 .cardContent {
     text-align: center;
 }
+
+.blogCard:hover {
+    transform: scale(1.05);
+    transition: transform 0.2s ease-in-out
+}
+
+.cardLink {
+    text-decoration: none;
+}
+
+/* .cardCover {
+    background: linear-gradient(top, rgba(0,0,0,0.7), rgba(0,0,0,0) 200px);
+} */

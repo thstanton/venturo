@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import './BlogForm.css'
 import { Input, Select, Option, Textarea, Card, Button, Checkbox } from '@mui/joy';
 import SelectLocation from '../SelectLocation/SelectLocation';
@@ -21,9 +22,11 @@ export default function BlogForm({ blogId }) {
 
     const [urlValue, setUrlValue] = useState('');
 
+    const router = useRouter();
+
     // fetch blog from database and mount the form with it
     useEffect(() => {
-        if (blogId !== NEW_BLOG_ID) {
+        if (blogId !== NEW_BLOG_ID) {   
             getBlogFromDB(blogId)
         }
 
@@ -112,6 +115,7 @@ export default function BlogForm({ blogId }) {
             } else {
                 console.log('Bad!');
             }
+
         } catch (error) {
             console.error(error);
         }
@@ -198,10 +202,10 @@ export default function BlogForm({ blogId }) {
             ...(updatedPhotoArray.length !== 0) && { photos: updatedPhotoArray },
             location: location,
             userId: user
-        }
+        }   
         console.log(body);
         // handle submit button for add or edit blog                                                            
-        saveBlog(body);
+        router.push('/user')
     };
 
     return (
@@ -211,7 +215,7 @@ export default function BlogForm({ blogId }) {
 
                 <Input className='blogTitle'
                     color="neutral"
-                    disabled={(blogId !== NEW_BLOG_ID) ? true : false}
+                    // disabled={(blogId !== NEW_BLOG_ID) ? true : false}
                     size="md"
                     placeholder="Title"
                     variant="outlined"
