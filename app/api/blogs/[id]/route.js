@@ -8,7 +8,7 @@ export async function GET(req,{ params }) {
         await dbConnect()
         const blog = await Blog.findOne({ "_id" : params.id})//.populate([userId, collectionIds]);
         // Return
-        return NextResponse.json({ status:200, blog: blog })
+        return NextResponse.json({ status: 200, blog: blog })
     } catch (error) {
         return NextResponse.json({ status: 400, error: error })
     }

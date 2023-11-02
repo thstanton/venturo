@@ -55,6 +55,6 @@ body {
   padding: 2vmin 4vmin;
 }
 
-.a-block h1, .b-block h1, .c-block h1 {
+.a-block h1, .a-block h3, .b-block h1, .c-block h1 {
   color: white;
 }
