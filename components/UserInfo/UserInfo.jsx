@@ -1,9 +1,11 @@
+"use client"
 import Typography from '@mui/joy/Typography'
 import { AspectRatio, Stack, Card, Button, Modal, ModalClose, ModalDialog, Sheet } from '@mui/joy'
 import SelectLocation from '../SelectLocation/SelectLocation'
 import { useState } from 'react'
 
 export default function UserInfo({user}) {
+    
     const [location, setLocation] = useState(null)
     const [showEditLocation, setShowEditLocation] = useState(false);
   
@@ -81,11 +83,11 @@ export default function UserInfo({user}) {
                                 <img src="https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png"  width={20} height={20}/>
                                 {/* display user saved address */}
                                 <Typography component="h1" variant="h5">
-                                    {user.location.formatted_address}
+                                    {(user.location) ? user.location.formatted_address : ''}
                                 </Typography>
                             </Stack>
                         }
-                        <Button variant="outlined" color="primary" onClick={handleOnEditClicked}>Edit Location</Button>
+                        <Button variant="outlined" color="primary" onClick={() => handleOnEditClicked()}>Edit Location</Button>
                     </Stack>
                 </Stack>
             </Stack>

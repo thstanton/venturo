@@ -4,12 +4,20 @@ import UserInfo from "@/components/UserInfo/UserInfo";
 import { checkUserObject } from "@/utilities/utility";
 
 import { Card, Typography, Divider} from "@mui/joy";
+import { useState,useEffect } from "react";
 
-export default async function UserPage() {
+export default function UserPage() {
+    const [user, setUser] = useState(null)
+    useEffect(() => {
+        async function loadUser(){
+            const user = await checkUserObject();
+            // console.log(`User Page ::::: ${JSON.stringify(user)}`);
+            setUser(user);
+        }
+        
+        loadUser();
+    },[])
     
-    const user = await checkUserObject();
-    console.log(`User Page ::::: ${JSON.stringify(user)}`);
-   
     return(
         <>        
         {user ? <Card>
