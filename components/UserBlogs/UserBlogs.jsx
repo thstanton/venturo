@@ -32,7 +32,7 @@ export default async function UserBlogs({user}) {
                 {/* display user avatar image */}
                 <Stack direction="column" spacing={1}>
                     {/* request to open BlogForm to add new blog, '-1' is the id of new blod */}
-                    <Link href="/form/blogform">
+                    <Link href="/form/blogform/-1">
                         <Button variant="outlined" color="primary">Add Blog</Button>
                     </Link>
                     <div className='recent-blogs d-block'>

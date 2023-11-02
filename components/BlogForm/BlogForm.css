@@ -91,13 +91,7 @@
     width: 80%;
 }
 
-/* .photoImg {
-    min-height: 8vmin;
-    min-width: 8vmin;
-} */
-
 .photoImg {
-   min-width: 8vmin;
-    min-height: 8vmin;
-    object-fit: cover;
+    min-height: 12vmin;
+    min-width: auto;
 }

@@ -1,6 +1,6 @@
 "use client"
 
-import { React, useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import './BlogForm.css'
 import { Input, Select, Option, Textarea, Card, Button, Checkbox } from '@mui/joy';
 import SelectLocation from '../SelectLocation/SelectLocation';
@@ -8,9 +8,10 @@ import SelectLocation from '../SelectLocation/SelectLocation';
 import { checkUserObject } from "@/utilities/utility";
 
 export default function BlogForm({ blogId }) {
-
+    const NEW_BLOG_ID = '-1'
     const [titleData, setTitleData] = useState('');
-    const [collectionIdsData, setCollectionIdsData] = useState([]);
+    const [collectionIdsData, setCollectionIdsData] = useState();
+    const [collectionOptionsData, setCollectionOptionsData] = useState([]);
     const [introductionData, setIntroductionData] = useState('');
     const [bodyData, setBodyData] = useState('');
     const [photosData, setPhotosData] = useState([]);
@@ -21,8 +22,8 @@ export default function BlogForm({ blogId }) {
     const [urlValue, setUrlValue] = useState('');
 
     // fetch blog from database and mount the form with it
-    useEffect( () => {
-        if (blogId) {
+    useEffect(() => {
+        if (blogId !== NEW_BLOG_ID) {
             getBlogFromDB(blogId)
         }
 
@@ -31,8 +32,7 @@ export default function BlogForm({ blogId }) {
                 const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blogs/${blogId}`)
                 const data = await res.json()
                 console.log(`getBlogFromDB fetch object:  ${JSON.stringify(data)}`)
-                if(data && data.blog)
-                {
+                if (data && data.blog) {
                     // set Title
                     setTitleData(data.blog.title)
 
@@ -59,7 +59,7 @@ export default function BlogForm({ blogId }) {
 
     async function saveBlog(body) {
         // edit blog
-        if (blogId) {
+        if (blogId !== NEW_BLOG_ID) {
             editBlogInDB(body)
         }// add blog
         else {
@@ -131,18 +131,35 @@ export default function BlogForm({ blogId }) {
     function handleTitleChange(e) {     // set the states to the user's inputs
         setTitleData(e.target.value)
     }
-    function handleCollectionIdsChange(event, newValue) {
+    function handleCollectionIdsChange(e, newValue) {
         console.log(`New Collection Object ${newValue}`)
         // setCollectionIdsData([...collectionIdsData,newValue])
         // TODO add the collection object
-        setCollectionIdsData((oldCollectionIds) => [...oldCollectionIds, newValue])
+        setCollectionIdsData(newValue);
     }
+
     function handleIntroductionChange(e) {
         setIntroductionData(e.target.value)
     }
     function handleBodyChange(e) {
         setBodyData(e.target.value)
     }
+
+    useEffect(() => {
+        async function fetchCollections() {
+            try {
+                const response = await fetch('http://localhost:3000/api/collections')
+                if (response.ok) {
+                    const data = await response.json();
+                    console.log(data.data);
+                    setCollectionOptionsData(data.data);
+                }
+            } catch (error) {
+                console.error(error);
+            }
+        }
+        fetchCollections();
+    }, [])
 
 
     async function submitBlog(e) {
@@ -152,6 +169,8 @@ export default function BlogForm({ blogId }) {
         if (introductionData === '') return
 
         if (bodyData === '') return
+
+        // if (collectionIdsData===null) return
 
         // const mainPhotoObject = photosData.filter(photo => photo.url===mainPhoto)
         // console.log(mainPhotoObject);
@@ -175,12 +194,11 @@ export default function BlogForm({ blogId }) {
             title: titleData,
             introduction: introductionData,
             body: bodyData,
-            //...(collectionIdsData.length !== 0)&& {collectionIds: collectionIdsData},
+            ...(collectionIdsData !== null) && { collectionIds: collectionIdsData },
             ...(updatedPhotoArray.length !== 0) && { photos: updatedPhotoArray },
             location: location,
             userId: user
         }
-        // if collectionIds data isn't empty, populate collectionIds        if photosData is not an empty string, populate photos
         console.log(body);
         // handle submit button for add or edit blog                                                            
         saveBlog(body);
@@ -193,17 +211,17 @@ export default function BlogForm({ blogId }) {
 
                 <Input className='blogTitle'
                     color="neutral"
-                    disabled={(blogId) ? true : false}
+                    disabled={(blogId !== NEW_BLOG_ID) ? true : false}
                     size="md"
                     placeholder="Title"
                     variant="outlined"
                     required
                     onChange={handleTitleChange}
                     name='title'
-                    value={titleData}/>
-                    
+                    value={titleData} />
+
                 <div className="LocationAndCollectionContainer">
-                    <SelectLocation className='locationAndCollection' setLocation={setLocation} location={location}/>
+                    <SelectLocation className='locationAndCollection' setLocation={setLocation} location={location} />
 
                     <Select className='locationAndCollection'
                         placeholder="Collection"
@@ -211,8 +229,11 @@ export default function BlogForm({ blogId }) {
                         variant="outlined"
                         onChange={handleCollectionIdsChange}
                     >
-                        <Option value="location1">Collection 1</Option>
-                        <Option value="location2">Collection 2</Option>
+                        {collectionOptionsData.length && collectionOptionsData.map((collection, index) => (
+                            <Option key={index} value={collection._id}>
+                                {collection.name}
+                            </Option>
+                        ))}
                     </Select>
                 </div>
                 <Textarea className="blogIntro"
@@ -249,7 +270,9 @@ export default function BlogForm({ blogId }) {
                             disabled={photosData.length >= 7}
                         >Upload
                         </Button>
+
                     </div>
+
                     {photosData.length > 0 &&
                         <div className="photoContainer">
                             {photosData.map((photo, index) => {
