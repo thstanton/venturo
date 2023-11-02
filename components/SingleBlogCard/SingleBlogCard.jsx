@@ -1,8 +1,9 @@
-import { Card, Typography, CardContent, CardCover, Button } from '@mui/joy';
+"use client"
+import { Card, Typography, CardContent, CardOverflow, CardCover, LocationOnRoundedIcon } from '@mui/joy';
 import './SingleBlogCard.css'
 import EditBlogButtons from '../EditBlogButtons/EditBlogButtons';
 
-export default async function SingleBlogCard({blog, editMode}) {
+export default function SingleBlogCard({blog, editMode}) {
   
   let mainImageUrl = '';
   async function getMainImage(blog){
@@ -13,7 +14,7 @@ export default async function SingleBlogCard({blog, editMode}) {
       }
   }
 
-  await getMainImage(blog)
+  getMainImage(blog)
 
   async function deleteBlog(){ 
     try {

@@ -1,0 +1,18 @@
+.CollectionList .card-header {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+}
+
+.CollectionList .accordion-summary {
+    display: flex;
+    flex-flow: row nowrap;
+    gap: 2vmin;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%
+}
+
+.CollectionList .accordion-summary span {
+    flex-basis: 100%;
+}

@@ -9,7 +9,6 @@ import { checkUserObject } from "@/utilities/utility";
 
 export default function BlogForm({ blogId }) {
 
-    // TODO END Test Block
     const [titleData, setTitleData] = useState('');
     const [collectionIdsData, setCollectionIdsData] = useState([]);
     const [introductionData, setIntroductionData] = useState('');
