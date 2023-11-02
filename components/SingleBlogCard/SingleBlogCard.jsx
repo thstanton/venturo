@@ -48,7 +48,7 @@ export default function SingleBlogCard({ blog, editMode, removeBlog }) {
       size="lg"
       variant='outlined'
       orientation='vertical'
-      >
+      component="a" href={`/blogs/${blog._id}`}>
 
       <CardCover>
         <img
