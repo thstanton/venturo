@@ -1,7 +1,7 @@
 "use client"
 import { Card, Typography, CardContent, CardOverflow, CardCover, LocationOnRoundedIcon, Link } from '@mui/joy';
 // import Link from 'next/link';
-// import './SingleBlogCard.css'
+import './SingleBlogCard.css'
 import EditBlogButtons from '../EditBlogButtons/EditBlogButtons';
 
 export default function SingleBlogCard({ blog, editMode, removeBlog }) {
