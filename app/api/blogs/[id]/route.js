@@ -6,9 +6,9 @@ import { NextResponse } from "next/server";
 export async function GET(req,{ params }) {
     try {
         await dbConnect()
-        const blog = await Blog.find({ "_id" : params.id});
+        const blog = await Blog.findOne({ "_id" : params.id})//.populate([userId, collectionIds]);
         // Return
-        return NextResponse.json({ status:200, blogs: blog })
+        return NextResponse.json({ status:200, blog: blog })
     } catch (error) {
         return NextResponse.json({ status: 400, error: error })
     }
@@ -29,13 +29,15 @@ export async function PUT(req,{ params }) {
     try {
         await dbConnect()
         const blog = await req.json()
-        const updatedBlog = await Blog.findOneAndUpdate({"title": blog.title},{
-            location: blog.location,
-            introduction: blog.introduction,
-            body: blog.body,
-            photos: blog.photos,
-            collectionIds: blog
-        });
+        // console.log(`Start Editing :::::: ${blog._id} ::::::: ${blog._id}`)
+        const updatedBlog = await Blog.findOneAndUpdate({ "title": blog.title },
+            {
+                "location": blog.location,
+                "introduction": blog.introduction,
+                "body": blog.body,
+                "photos": blog.photos,
+                "collectionIds": blog.collectionIds
+            })
         // Return
         return NextResponse.json({ status:200, blog: updatedBlog })
     } catch (error) {

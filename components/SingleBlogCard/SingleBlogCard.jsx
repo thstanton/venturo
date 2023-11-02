@@ -35,10 +35,6 @@ export default async function SingleBlogCard({blog, editMode}) {
        console.error(error);
     }
   }
-
-  async function editBlog(blog){
-    alert(`Edit User Blog `)
-  }
   
   return (
     <Card 
@@ -83,7 +79,7 @@ export default async function SingleBlogCard({blog, editMode}) {
         </Typography>
       </CardContent>
       {/* add edit and delete blog component in case of user selected blogs */}
-      {editMode ?  <EditBlogButtons key={blog._id} deleteBlog={deleteBlog} editBlog={editBlog}/>: null}
+      {editMode ?  <EditBlogButtons key={blog._id} blog={blog} deleteBlog={deleteBlog} />: null}
     </Card>
   )
 }
