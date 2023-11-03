@@ -13,7 +13,7 @@ export default function UserLogin() {
         return(
             // <div className="flex gap-4 ml-auto">
             <div className="userContainer">
-            <button className="logOutBtn" onClick={() => signOut()}>
+            <button className="logOutBtn" onClick={() => signOut({ callbackUrl: process.env.NEXT_PUBLIC_HOME_PAGE_URL })}>
                 Logout
             </button>
             {/* got to User profile page when the user click on profile data */}
