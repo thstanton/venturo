@@ -1,28 +1,26 @@
 import BlogList from "@/components/BlogList/BlogList"
 import { Typography } from "@mui/joy"
+import dbConnect from "@/config/database";
+import Blog from "@/models/blogs";
+import Collection from "@/models/collections";
 
 export default async function SingleCollectionPage({ params }) {
 
     async function fetchData() {
         try {
-            const res = await fetch(`${process.env.API_URL}/collections/blogs/${params.id}`, {
-                method: 'GET',
-                headers: { 'content-type': 'application/json' }
-            })
-            const data = await res.json()
-            if (data.status !== 200) {
-                throw new Error('Collections not retrieved from database')
-            }
-            console.log(data)
+            await dbConnect()
+            const collection = await Collection.findById(params.id)
+            console.log(collection)
+            const blogs = await Blog.find({ "collectionIds" : params.id})
+            console.log(blogs)
+            const data = { collection: JSON.parse(JSON.stringify(collection)), blogs: JSON.parse(JSON.stringify(blogs)) }
             return data
         } catch (error) {
-            console.error(error)
+            throw new Error('Something went wrong!', error)
         }
     }
 
     const { collection, blogs } = await fetchData()
-
-
 
     return (
         <div>
