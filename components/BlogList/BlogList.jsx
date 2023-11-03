@@ -2,7 +2,7 @@ import SingleBlogCard from "../SingleBlogCard/SingleBlogCard";
 import './BlogList.css'
 
 export default function BlogList({ blogs, editMode, removeBlog }) {
-  console.log(blogs);
+  // console.log(blogs);
   return (
     <div className="BlogList">
       {

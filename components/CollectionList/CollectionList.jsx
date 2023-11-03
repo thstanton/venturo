@@ -27,7 +27,7 @@ export default function CollectionList() {
                 })
 
                 const data = await res.json()
-                console.log(data)
+                // console.log(data)
                 if (data.status !== 200) {
                     throw new Error('Collections not retrieved from database')
                 }

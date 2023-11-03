@@ -10,12 +10,12 @@ export default function UserBlogs({ user }) {
     const [change, setChange] = useState(null)
 
     const loadBlogs = async () => {
-        console.log(user)
+        // console.log(user)
         const URL = `${process.env.NEXT_PUBLIC_API_URL}/blogs/user/${user._id}`
-        console.log(`URL ::: ${URL}`)
+        // console.log(`URL ::: ${URL}`)
         const res = await fetch(URL)
         const data = await res.json()
-        console.log(data)
+        // console.log(data)
         setUserBlogs(data.blogs)
     }
 

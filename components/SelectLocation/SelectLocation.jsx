@@ -4,7 +4,7 @@ export default function SelectLocation({location, setLocation}){
   // const YOUR_GOOGLE_MAPS_API_KEY = 'AIzaSyBdOVHEaQ9lAlTI1tCntVcGJamHsUmkLhU';  
   async function onPlaceSelectedHandler(place){
       if (place){
-        console.log(`Place : ${JSON.stringify(place)}`);
+        // console.log(`Place : ${JSON.stringify(place)}`);
           
         const locObject = {
           place_id: place.place_id, 
@@ -15,7 +15,7 @@ export default function SelectLocation({location, setLocation}){
           formatted_address: place.formatted_address
         }
 
-        console.log(`Selected Place Object : ${JSON.stringify(locObject)}`);
+        // console.log(`Selected Place Object : ${JSON.stringify(locObject)}`);
         setLocation(locObject)
       }
     }

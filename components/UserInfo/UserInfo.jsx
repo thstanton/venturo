@@ -13,8 +13,8 @@ export default function UserInfo({user}) {
         // case of edit mode is shown
         if(showEditLocation)
         {
-            console.log('In Edit Mode');
-            console.log(`User After Udating Location ${JSON.stringify(location)}`);
+            // console.log('In Edit Mode');
+            // console.log(`User After Udating Location ${JSON.stringify(location)}`);
             
             const URL = `${process.env.NEXT_PUBLIC_API_URL}/user`
             await fetch(URL,{
@@ -30,7 +30,7 @@ export default function UserInfo({user}) {
             .then(res => 
             {
                 if(res.status === 200){
-                    console.log('User Location has been updated');
+                    // console.log('User Location has been updated');
                     setShowEditLocation(false)
                     user.location = location;
                 }
@@ -39,7 +39,7 @@ export default function UserInfo({user}) {
             })
             
         }else{
-            console.log('In View Mode');
+            // console.log('In View Mode');
             setShowEditLocation(true)
         }
     }

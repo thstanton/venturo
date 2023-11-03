@@ -9,7 +9,7 @@ export default function UserLogin() {
     const {data: session} = useSession();
     // in case of the user is loggedin and has it's user data retrived from google-auth api
     if(session && session.user){
-        console.log(`before callback:::::`)
+        // console.log(`before callback:::::`)
         return(
             // <div className="flex gap-4 ml-auto">
             <div className="userContainer">

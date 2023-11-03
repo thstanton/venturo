@@ -19,7 +19,7 @@ export default function SingleBlogCard({ blog, editMode, removeBlog }) {
 
   async function deleteBlog() {
     try {
-      console.log(`Delete User Blog : )//${blog.title}`)
+      // console.log(`Delete User Blog : )//${blog.title}`)
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blogs/${blog._id}`, {
         method: 'DELETE',
         headers: {
@@ -30,7 +30,7 @@ export default function SingleBlogCard({ blog, editMode, removeBlog }) {
       const data = await response.json()
       if (data.status === 200) {
         console.log('Okay!');
-        console.log(response);
+        // console.log(response);
         removeBlog(blog)
       } else {
         console.log('Bad!');

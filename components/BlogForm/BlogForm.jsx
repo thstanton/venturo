@@ -140,9 +140,9 @@ export default function BlogForm({ blogId }) {
         setTitleData(e.target.value)
     }
     function handleCollectionIdsChange(e, newValue) {
-        console.log(`New Collection Object ${newValue}`)
+        // console.log(`New Collection Object ${newValue}`)
         // setCollectionIdsData([...collectionIdsData,newValue])
-        // TODO add the collection object
+        //  add the collection object
         setCollectionIdsData(newValue);
     }
 
@@ -159,7 +159,7 @@ export default function BlogForm({ blogId }) {
                 const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/collections`)
                 if (response.ok) {
                     const data = await response.json();
-                    console.log(data.data);
+                    // console.log(data.data);
                     setCollectionOptionsData(data.data);
                 }
             } catch (error) {
@@ -192,11 +192,11 @@ export default function BlogForm({ blogId }) {
                 return photo
             }
         })
-        console.log('updatedPhotoArray', updatedPhotoArray);
+        // console.log('updatedPhotoArray', updatedPhotoArray);
 
         // get user from database before saving new blog
         const user = await checkUserObject();
-        console.log(`Session User : ${JSON.stringify(user)}`);
+        // console.log(`Session User : ${JSON.stringify(user)}`);
 
         const body = {
             title: titleData,
@@ -207,7 +207,7 @@ export default function BlogForm({ blogId }) {
             location: location,
             userId: user
         }   
-        console.log(body);
+        // console.log(body);
         saveBlog(body)
     };
 
