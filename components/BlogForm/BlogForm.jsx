@@ -156,7 +156,7 @@ export default function BlogForm({ blogId }) {
     useEffect(() => {
         async function fetchCollections() {
             try {
-                const response = await fetch('http://localhost:3000/api/collections')
+                const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/collections`)
                 if (response.ok) {
                     const data = await response.json();
                     console.log(data.data);
