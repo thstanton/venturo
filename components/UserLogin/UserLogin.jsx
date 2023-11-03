@@ -18,7 +18,7 @@ export default function UserLogin() {
             </button>
             {/* got to User profile page when the user click on profile data */}
             <Link href="/user"> 
-                <div onClick={()=>{}}>
+                <div className="userContainer">
                     <p className="text-sky-600">{ session?.user?.name }</p>
                     <img 
                         id="userIcon"
