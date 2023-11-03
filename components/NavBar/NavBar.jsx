@@ -9,7 +9,6 @@ export default function NavBar() {
         <div className="navContainer">
             <Link className='navVenturo' href="/" style={{textDecoration: 'none'}}>Venturo</Link>
             <Link className='navItem' href="/blogs" style={{textDecoration: 'none'}}>Blogs</Link>
-            {/* <Link className='navItem' href="/locations" style={{textDecoration: 'none'}}>Locations</Link> */}
             <Link className='navItem' href="/collections" style={{textDecoration: 'none'}}>Collections</Link>
             <UserLogin />
         </div>

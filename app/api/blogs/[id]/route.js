@@ -1,14 +1,16 @@
 import dbConnect from "@/config/database";
 import Blog from "@/models/blogs";
+import User from "@/models/users";
 import { NextResponse } from "next/server";
 
-// Fetch recent blogs and top locations to populate home page
+
 export async function GET(req,{ params }) {
     try {
         await dbConnect()
         const blog = await Blog.findOne({ "_id" : params.id})//.populate([userId, collectionIds]);
+        const user = await User.findById(blog.userId, 'name avatar')
         // Return
-        return NextResponse.json({ status: 200, blog: blog })
+        return NextResponse.json({ status: 200, blog: blog, user: user })
     } catch (error) {
         return NextResponse.json({ status: 400, error: error })
     }
