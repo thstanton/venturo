@@ -3,15 +3,20 @@ import BlogTitleBlock from '@/components/BlogTitleBlock/BlogTitleBlock'
 import BlogImageGallery from '@/components/BlogImageGallery/BlogImageGallery'
 import BlogLocationWidget from '@/components/BlogLocationWidget/BlogLocationWidget'
 import { Grid, Typography } from '@mui/joy'
+import dbConnect from '@/config/database'
+import Blog from '@/models/blogs'
+import User from '@/models/users'
 import './SinglePost.css'
 
 async function getBlog(id) {
   try {
-    const res = await fetch(`${process.env.API_URL}/blogs/${id}`)
-    const data = await res.json()
+    await dbConnect()
+    const blog = await Blog.findOne({ "_id" : id})
+    const user = await User.findById(blog.userId, 'name avatar')
+    const data = { blog: JSON.parse(JSON.stringify(blog)), user: JSON.parse(JSON.stringify(user))}
     return data
   } catch (error) {
-    return console.error(error)
+    throw new Error('Unable to fetch data', error)
   }
 }
 

@@ -1,22 +1,15 @@
 import VideoBlock from "./VideoBlock"
 import SingleCollectionCard from "@/components/SingleCollectionCard/SingleCollectionCard"
+import dbConnect from "@/config/database"
+import Collection from "@/models/collections"
 
 async function fetchCollections() {
     try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/collections`, {
-            method: 'GET',
-            headers: { 'content-type': 'application/json' },
-        })
-
-        const data = await res.json()
-        console.log(data)
-        if (data.status !== 200) {
-            throw new Error('Collections not retrieved from database')
-        }
-        return data.data
-
+        await dbConnect()
+        const collections = await Collection.find()
+        return JSON.parse(JSON.stringify(collections))
     } catch (error) {
-        console.error(error)
+        throw new Error('Something went wrong', error)
     }
 }
 
