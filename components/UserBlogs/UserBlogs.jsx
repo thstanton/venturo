@@ -7,7 +7,7 @@ import { useEffect, useState } from "react"
 export default function UserBlogs({ user }) {
     // console.log(user)
     const [userBlogs, setUserBlogs] = useState([])
-    const [userData, setUserData] = useState(user)
+    const [change, setChange] = useState(null)
 
     const loadBlogs = async () => {
         console.log(user)
@@ -21,7 +21,7 @@ export default function UserBlogs({ user }) {
 
     useEffect(() => {
         loadBlogs();
-    }, [user])
+    }, [user, change])
 
     /**
      * remove deleted blog from list nad update the list view
@@ -29,7 +29,8 @@ export default function UserBlogs({ user }) {
      */
     function removeBlog(blog) {
         if (blog)
-            userBlogs.splice(userBlogs.findIndex(b => b.title == blog.title), 1);
+            setChange(blog)
+            //setUserBlogs(userBlogs.splice(userBlogs.findIndex(b => b.title == blog.title), 1));
 
     }
     

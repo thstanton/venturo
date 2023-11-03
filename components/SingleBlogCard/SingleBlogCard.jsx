@@ -6,6 +6,7 @@ import EditBlogButtons from '../EditBlogButtons/EditBlogButtons';
 
 export default function SingleBlogCard({ blog, editMode, removeBlog }) {
   console.log(blog);
+
   let mainImageUrl = '';
   async function getMainImage(blog) {
     if (blog.photos !== null) {
@@ -31,7 +32,6 @@ export default function SingleBlogCard({ blog, editMode, removeBlog }) {
       if (data.status === 200) {
         console.log('Okay!');
         console.log(response);
-        //TODO call remove blog
         removeBlog(blog)
       } else {
         console.log('Bad!');
@@ -47,8 +47,7 @@ export default function SingleBlogCard({ blog, editMode, removeBlog }) {
       className="blogCard"
       size="lg"
       variant='outlined'
-      orientation='vertical'
-      component="a" href={`/blogs/${blog._id}`}>
+      orientation='vertical'>
 
       <CardCover>
         <img
@@ -61,7 +60,8 @@ export default function SingleBlogCard({ blog, editMode, removeBlog }) {
         <Typography
           className="blogTitle"
           level="title-lg"
-          textColor="#fff">
+          textColor="#fff"
+          component="a" href={`/blogs/${blog._id}`}>
           {blog.title}
         </Typography>
       </CardContent>
