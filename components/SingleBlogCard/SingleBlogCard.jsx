@@ -5,7 +5,6 @@ import './SingleBlogCard.css'
 import EditBlogButtons from '../EditBlogButtons/EditBlogButtons';
 
 export default function SingleBlogCard({ blog, editMode, removeBlog }) {
-  console.log(blog);
 
   let mainImageUrl = '';
   async function getMainImage(blog) {
