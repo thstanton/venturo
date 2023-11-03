@@ -34,7 +34,7 @@ export default function UserLogin() {
     }
     // in case of the user hasn't login yet
     return(
-        <button onClick={() => signIn({callbackUrl:process.env.NEXT_AUTH_CALLBACK})} className='logInBtn'>
+        <button onClick={() => signIn()} className='logInBtn'>
             Log in
         </button> 
     )
