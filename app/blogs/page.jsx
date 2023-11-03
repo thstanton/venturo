@@ -1,17 +1,19 @@
 import BlogList from "@/components/BlogList/BlogList";
 import { Typography } from "@mui/joy";
+import Blog from "@/models/blogs";
+import dbConnect from "@/config/database";
 
 async function fetchBlogs() {
     try {
-        const res = await fetch(`${process.env.API_URL}/blogs`)
-        if (res.ok) {
-            const data = await res.json()
-            return data.data
-        }
-        console.log('Something went wrong')
-    } catch (error) {
+        await dbConnect()
+        // Get 5 most recent blogs
+        const blogs = await Blog.find()
+        const data = JSON.parse(JSON.stringify(blogs))
+        return data
+    
+      } catch (error) {
         console.error(error)
-    }
+      }
 }
 
 export default async function AllBlogs() {
