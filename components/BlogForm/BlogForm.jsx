@@ -34,7 +34,7 @@ export default function BlogForm({ blogId }) {
             try {
                 const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blogs/${blogId}`)
                 const data = await res.json()
-                console.log(`getBlogFromDB fetch object:  ${JSON.stringify(data)}`)
+                // console.log(`getBlogFromDB fetch object:  ${JSON.stringify(data)}`)
                 if (data && data.blog) {
                     // set Title
                     setTitleData(data.blog.title)
@@ -86,7 +86,7 @@ export default function BlogForm({ blogId }) {
 
             if (response.ok) {
                 console.log('Okay!');
-                console.log(response);
+                // console.log(response);
                 // handle submit button for add or edit blog                                                            
                 router.push('/user')
             } else {
@@ -113,7 +113,7 @@ export default function BlogForm({ blogId }) {
 
             if (response.ok) {
                 console.log('Okay!');
-                console.log(response);
+                // console.log(response);
                 // handle submit button for add or edit blog                                                            
                 router.push('/user')
             } else {
@@ -132,7 +132,7 @@ export default function BlogForm({ blogId }) {
         }
         setPhotosData([...photosData, newItem])
         setUrlValue('')
-        console.log('photosData:', photosData);
+        // console.log('photosData:', photosData);
     }
 
     // Functions to handle data change   

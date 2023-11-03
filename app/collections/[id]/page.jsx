@@ -10,9 +10,9 @@ export default async function SingleCollectionPage({ params }) {
         try {
             await dbConnect()
             const collection = await Collection.findById(params.id)
-            console.log(collection)
+            // console.log(collection)
             const blogs = await Blog.find({ "collectionIds" : params.id})
-            console.log(blogs)
+            // console.log(blogs)
             const data = { collection: JSON.parse(JSON.stringify(collection)), blogs: JSON.parse(JSON.stringify(blogs)) }
             return data
         } catch (error) {

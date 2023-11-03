@@ -26,7 +26,7 @@ export async function PUT(req) {
     try {
         await dbConnect()
         const userReq = await req.json()
-        console.log(`Updated Object ${JSON.stringify(userReq)}`)
+        // console.log(`Updated Object ${JSON.stringify(userReq)}`)
         const user = await User.findOneAndUpdate({ email: userReq.email },{location: userReq.locationObject})
         
         return NextResponse.json({ status: 200, data: user })

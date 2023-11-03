@@ -29,7 +29,7 @@ const handler = NextAuth({
             .then(res => 
             {
                 if(res.status === 200){
-                    console.log(`Start Login User : ${JSON.stringify(res)}`);
+                    // console.log(`Start Login User : ${JSON.stringify(res)}`);
                     console.log('Saved Successfully');
                 }
             }).catch (error => {

@@ -8,9 +8,9 @@ export async function GET(req, { params }) {
     try {
         await dbConnect()
         const collection = await Collection.findById(params.id)
-        console.log(collection)
+        // console.log(collection)
         const blogs = await Blog.find({ "collectionIds" : params.id})
-        console.log(blogs)
+        // console.log(blogs)
         return NextResponse.json({ status: 200, blogs: blogs, collection: collection })
     } catch (error) {
         return NextResponse.json({ status: 400, error: error })
