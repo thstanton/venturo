@@ -1,7 +1,7 @@
 import ReactGoogleAutocomplete from "react-google-autocomplete";
 
 export default function SelectLocation({location, setLocation}){
-  const YOUR_GOOGLE_MAPS_API_KEY = 'AIzaSyBdOVHEaQ9lAlTI1tCntVcGJamHsUmkLhU';  
+  // const YOUR_GOOGLE_MAPS_API_KEY = 'AIzaSyBdOVHEaQ9lAlTI1tCntVcGJamHsUmkLhU';  
   async function onPlaceSelectedHandler(place){
       if (place){
         console.log(`Place : ${JSON.stringify(place)}`);
@@ -21,18 +21,9 @@ export default function SelectLocation({location, setLocation}){
     }
     return(   
         <ReactGoogleAutocomplete
-          apiKey={YOUR_GOOGLE_MAPS_API_KEY}
+          apiKey={process.env.NEXT_PUBLIC_YOUR_GOOGLE_MAPS_API_KEY}
           onPlaceSelected={onPlaceSelectedHandler}
           defaultValue={location?.formatted_address}/>
     )
   
 }
-  
-
-
-// async function onPlaceSelectedHandler(place){
-//     if (place) {
-//       console.log(`Place : ${JSON.stringify(place)}`)
-// }}
-
-// export { onPlaceSelectedHandler }
