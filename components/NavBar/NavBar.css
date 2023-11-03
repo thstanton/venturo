@@ -16,7 +16,7 @@
     font-family: Poppins;
 }
 
-.navVenturo {
+.navContainer a.navVenturo {
     font-size: 6vmin;
     color: white;
     font-family: 'Bebas Neue';
