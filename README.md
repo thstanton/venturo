@@ -52,19 +52,19 @@ This project was completed in a group of 3, in 1 week.
 
 As this was a group project, the planning process was crucial in ensuring that everyone understood the intended outcome and how the components would come together to make the whole. To support this, we created a Trello board to track the intended functionality (and nice-to-haves), wireframes using Excalidraw, and detailed overviews of the schema, back end endpoints and front end components before starting.
 
-![alt_text](images/image1.png "image_tooltip")
+![Trello board screenshot](readme-images/image1.png)
 
 **Wireframes:**
 
-![alt_text](images/image2.png "image_tooltip")
+![User page wirefram](readme-images/image2.png)
 
-![alt_text](images/image3.png "image_tooltip")
+![Create/edit blog page wireframe](readme-images/image3.png)
 
-![alt_text](images/image4.png "image_tooltip")
+![Home page wireframe](readme-images/image4.png)
 
-![alt_text](images/image5.png "image_tooltip")
+![Single blog page wireframe](readme-images/image6.png)
 
-![alt_text](images/image6.png "image_tooltip")
+![Collection page wireframe](readme-images/image7.png)
 
 
 ## Build/Code Process
